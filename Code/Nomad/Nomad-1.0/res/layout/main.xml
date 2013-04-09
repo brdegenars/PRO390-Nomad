@@ -8,7 +8,32 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World, MyActivity"
-            />
+            android:text="@string/address"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cityStateZip"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"/>
+
+    <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Top Center"
+            android:id="@+id/button"
+            android:layout_gravity="center"
+            android:singleLine="false"/>
+
+    <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Top Left"
+            android:id="@+id/button1"
+            android:layout_gravity="left"/>
+
 </LinearLayout>
 
