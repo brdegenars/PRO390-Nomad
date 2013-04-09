@@ -1,0 +1,9 @@
+Week 1
+
+DONE	Create Wireframe
+TODO	HUD (top and bottom margins on home screen)
+		- display's dummy data
+TODO	Hot pads
+		- should function according to requirements
+		- defaults should show up
+		- blank pads should still show
