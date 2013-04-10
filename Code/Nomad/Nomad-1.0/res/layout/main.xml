@@ -12,7 +12,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/address"
-                android:id="@+id/textView/address"
+                android:id="@+id/textView_home_address"
                 android:layout_column="0"
                 android:layout_span="3"
                 android:layout_gravity="center_horizontal"/>
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cityStateZip"
-                android:id="@+id/textView/cityStateZip"
+                android:id="@+id/textView_home_cityStateZip"
                 android:layout_column="0"
                 android:layout_span="3"
                 android:layout_gravity="center_horizontal"/>
@@ -41,20 +41,20 @@
         <ImageButton
                 android:layout_width="140dp"
                 android:layout_height="85dp"
-                android:id="@+id/imageButton/home/topLeft"
+                android:id="@+id/imageButton_home_topLeft"
                 android:layout_column="0"/>
 
         <ImageButton
                 android:layout_width="140dp"
                 android:layout_height="85dp"
-                android:id="@+id/imageButton/home/topCenter"
+                android:id="@+id/imageButton_home_topCenter"
                 android:layout_column="1"
                 android:adjustViewBounds="false"/>
 
         <ImageButton
                 android:layout_width="140dp"
                 android:layout_height="85dp"
-                android:id="@+id/imageButton/home/topRight"
+                android:id="@+id/imageButton_home_topRight"
                 android:layout_column="2"/>
     </TableRow>
 
@@ -66,19 +66,19 @@
         <ImageButton
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:id="@+id/imageButton/home/bottomLeft"
+                android:id="@+id/imageButton_home_bottomLeft"
                 android:layout_column="0"/>
 
         <ImageButton
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:id="@+id/imageButton/home/bottomCenter"
+                android:id="@+id/imageButton_home_bottomCenter"
                 android:layout_column="1"/>
 
         <ImageButton
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:id="@+id/imageButton/home/bottomRight"
+                android:id="@+id/imageButton_home_bottomRight"
                 android:layout_column="2"/>
     </TableRow>
 
@@ -90,7 +90,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/speed"
-                android:id="@+id/textView/home/speed"
+                android:id="@+id/textView_home_speed"
                 android:layout_column="0"
                 android:layout_span="1"
                 android:layout_gravity="center_horizontal"/>
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/timeElapsed"
-                android:id="@+id/textView/home/timeElapsed"
+                android:id="@+id/textView_home_timeElapsed"
                 android:layout_column="1"
                 />
 
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/temp"
-                android:id="@+id/textView1"
+                android:id="@+id/textView_home_temp"
                 android:layout_column="2"/>
     </TableRow>
 
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/driveTime"
-                android:id="@+id/textView"
+                android:id="@+id/textView_home_driveTime"
                 android:layout_column="1"/>
     </TableRow>
 </TableLayout>
