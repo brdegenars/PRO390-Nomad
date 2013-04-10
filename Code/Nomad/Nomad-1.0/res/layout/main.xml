@@ -1,39 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
+<TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/address"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cityStateZip"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Top Center"
-            android:id="@+id/button"
-            android:layout_gravity="center"
-            android:singleLine="false"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:id="@+id/textView/address"
+                android:layout_column="0"
+                android:layout_span="3"
+                android:layout_gravity="center_horizontal"/>
+    </TableRow>
 
-    <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Top Left"
-            android:id="@+id/button1"
-            android:layout_gravity="left"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cityStateZip"
+                android:id="@+id/textView/cityStateZip"
+                android:layout_column="0"
+                android:layout_span="3"
+                android:layout_gravity="center_horizontal"/>
 
+    </TableRow>
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
+
+        <ImageButton
+                android:layout_width="140dp"
+                android:layout_height="85dp"
+                android:id="@+id/imageButton/home/topLeft"
+                android:layout_column="0"/>
+
+        <ImageButton
+                android:layout_width="140dp"
+                android:layout_height="85dp"
+                android:id="@+id/imageButton/home/topCenter"
+                android:layout_column="1"
+                android:adjustViewBounds="false"/>
+
+        <ImageButton
+                android:layout_width="140dp"
+                android:layout_height="85dp"
+                android:id="@+id/imageButton/home/topRight"
+                android:layout_column="2"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
+
+        <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/imageButton/home/bottomLeft"
+                android:layout_column="0"/>
+
+        <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/imageButton/home/bottomCenter"
+                android:layout_column="1"/>
+
+        <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/imageButton/home/bottomRight"
+                android:layout_column="2"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/speed"
+                android:id="@+id/textView/home/speed"
+                android:layout_column="0"
+                android:layout_span="1"
+                android:layout_gravity="center_horizontal"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeElapsed"
+                android:id="@+id/textView/home/timeElapsed"
+                android:layout_column="1"
+                />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temp"
+                android:id="@+id/textView1"
+                android:layout_column="2"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/driveTime"
+                android:id="@+id/textView"
+                android:layout_column="1"/>
+    </TableRow>
+</TableLayout>

@@ -3,4 +3,9 @@
     <string name="app_name">Nomad</string>
     <string name="address">Address</string>
     <string name="cityStateZip">City, State Zip</string>
+    <string name="speed">Speed</string>
+    <string name="timeElapsed">Time Elapsed : </string>
+    <string name="driveTime">Drive Time : </string>
+    <string name="direction">Direction</string>
+    <string name="temp">Temperature : </string>
 </resources>
