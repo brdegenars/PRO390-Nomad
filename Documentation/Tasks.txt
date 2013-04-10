@@ -1,9 +1,12 @@
 Week 1
 
 DONE	Create Wireframe
-TODO	HUD (top and bottom margins on home screen)
-		- display's dummy data
-TODO	Hot pads
-		- should function according to requirements
-		- defaults should show up
-		- blank pads should still show
+DONE	HUD (top and bottom margins on home screen)
+TODO		- display's dummy data
+DONE	Hot pads
+TODO		- should function according to requirements
+TODO		- defaults should show up
+TODO		- blank pads should still show
+TODO	Parse navigation data from one point to another
+TODO	Take parsed info and translate into model data
+TODO	Take model data and display it on an actual map
