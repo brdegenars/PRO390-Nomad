@@ -56,6 +56,8 @@ public class RequestFactory {
             outputStream = mapRequestURL.getOutputStream();
             bufferedOutputStream = new BufferedOutputStream(outputStream);
 
+            // TODO: Either just JAXB or XPATH or something to parse the XML from the buffered stream above.
+
         } catch (MalformedURLException e){
 
             e.printStackTrace();
