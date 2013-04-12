@@ -1,4 +1,4 @@
-Week 1
+Week 1 & 2
 
 DONE	Create Wireframe
 DONE	HUD (top and bottom margins on home screen)
@@ -12,5 +12,6 @@ TODO	Parse navigation data from one point to another
 TODO		- Create http request based on optional paramaters selected
 TODO		- Send request and get the returning data
 TODO		- Pase data via some service (JAXB or XPATH)
+TODO			- do refresher research on JAXB and XPATH
 TODO	Take parsed info and translate into model data
 TODO	Take model data and display it on an actual map
