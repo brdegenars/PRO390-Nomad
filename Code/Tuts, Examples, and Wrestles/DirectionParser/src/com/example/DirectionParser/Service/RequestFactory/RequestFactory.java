@@ -1,12 +1,10 @@
 package com.example.DirectionParser.Service.RequestFactory;
 
 import org.apache.http.HttpRequest;
-import org.apache.http.client.HttpClient;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -22,24 +20,27 @@ import java.util.Map;
  */
 public class RequestFactory {
 
-    private Map<String, String> requestParameters;
+    private Map<String, String[]> requestParameters;
     private String mode;
 
     public RequestFactory(){
-        requestParameters = new HashMap<String, String>();
+        requestParameters = new HashMap<String, String[]>();
         requestParameters.put("mode", null);
-        requestParameters.put("waypoints", null);
+        requestParameters.put("way-points", null);
         requestParameters.put("avoid", null);
         requestParameters.put("units", null);
     }
 
     public HttpRequest getRequest(){
 
-        for(String parameter : requestParameters.values()){
+        String url = "https://maps.googleapis.com/maps/api/directions/";
 
-            if(!parameter.isEmpty()){
+        for(String parameter : requestParameters.keySet()){
+
+            String[] currentValue = requestParameters.get(parameter);
+            if(currentValue != null){
                 // TODO: check from mode to units and concat onto the request the appropriate optional parameters.
-
+                extractParameter(url, parameter, currentValue);
             }
         }
 
@@ -49,8 +50,8 @@ public class RequestFactory {
 
         try{
 
-            URL url = new URL("https://");
-            mapRequestURL = url.openConnection();
+            URL urlObject = new URL("https://");
+            mapRequestURL = urlObject.openConnection();
             mapRequestURL.connect();
 
             outputStream = mapRequestURL.getOutputStream();
@@ -70,5 +71,14 @@ public class RequestFactory {
 
         return null;
 
+    }
+
+    public String extractParameter(String url, String parameter, String[] parameterValue){
+
+        if(parameter.equals("way-points")){
+           // TODO: format url for multiple waypoints.
+        }
+        url.concat(parameter + "=" + parameterValue + "&");
+        return url;
     }
 }
