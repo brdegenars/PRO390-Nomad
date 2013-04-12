@@ -1,13 +1,15 @@
 package com.example.DirectionParser.Service.RequestFactory;
 
 import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.BufferedOutputStream;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,12 +23,13 @@ import java.util.Map;
 public class RequestFactory {
 
     private Map<String, String[]> requestParameters;
-    private String mode;
+
+    private static final int STATUS_CODE_OK = 200;
 
     public RequestFactory(){
         requestParameters = new HashMap<String, String[]>();
         requestParameters.put("mode", null);
-        requestParameters.put("way-points", null);
+        requestParameters.put("waypoints", null);
         requestParameters.put("avoid", null);
         requestParameters.put("units", null);
     }
@@ -44,41 +47,48 @@ public class RequestFactory {
             }
         }
 
-        URLConnection mapRequestURL = null;
-        OutputStream outputStream = null;
-        BufferedOutputStream bufferedOutputStream = null;
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        HttpResponse httpResponse = null;
 
-        try{
-
-            URL urlObject = new URL("https://");
-            mapRequestURL = urlObject.openConnection();
-            mapRequestURL.connect();
-
-            outputStream = mapRequestURL.getOutputStream();
-            bufferedOutputStream = new BufferedOutputStream(outputStream);
-
-            // TODO: Either just JAXB or XPATH or something to parse the XML from the buffered stream above.
-
-        } catch (MalformedURLException e){
-
-            e.printStackTrace();
-
-        } catch (IOException e){
-
-            e.printStackTrace();
-
+        try {
+            httpResponse = httpClient.execute(new HttpGet(url));
+        } catch (IOException e) {
+            System.out.println("Couldn't execute url and successfully get a response.");
         }
 
+        StatusLine status = httpResponse.getStatusLine();
+
+        if(status.getStatusCode() != STATUS_CODE_OK)
+            System.out.println("Status code not ok : STATUS CODE " + status.getStatusCode());
+
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+
+        try {
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            System.out.println("Document builder failed to be built.");
+        }
+
+        // TODO: finish building document, possibly switch to JAXB for building the XML, then XPATH to navigate.
         return null;
 
     }
 
-    public String extractParameter(String url, String parameter, String[] parameterValue){
+    public String extractParameter(String url, String parameter, String[] parameterValues){
 
-        if(parameter.equals("way-points")){
-           // TODO: format url for multiple waypoints.
+        if(parameter.equals("way-points") && parameterValues.length > 1){
+
+            url = url.concat(parameter + "=" + parameterValues[0] + "|");
+
+            for(int i = 1; i < parameterValues.length - 1; i++){
+                url = url.concat(parameterValues[i] + "|");
+            }
+
+            url = url.concat(parameterValues[parameterValues.length-1] + "&");
+            return url;
         }
-        url.concat(parameter + "=" + parameterValue + "&");
+
+        url = url.concat(parameter + "=" + parameterValues[0] + "&");
         return url;
     }
 }
