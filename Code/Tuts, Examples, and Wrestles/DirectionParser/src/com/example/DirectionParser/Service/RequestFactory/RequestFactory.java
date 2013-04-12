@@ -5,6 +5,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,12 +50,13 @@ public class RequestFactory {
         }
 
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpResponse httpResponse = null;
+        HttpResponse httpResponse;
 
         try {
             httpResponse = httpClient.execute(new HttpGet(url));
         } catch (IOException e) {
             System.out.println("Couldn't execute url and successfully get a response.");
+            return null;
         }
 
         StatusLine status = httpResponse.getStatusLine();
@@ -62,16 +65,26 @@ public class RequestFactory {
             System.out.println("Status code not ok : STATUS CODE " + status.getStatusCode());
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder;
+        Document document = null;
 
         try {
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            document = documentBuilder.parse(httpResponse.getEntity().getContent());
         } catch (ParserConfigurationException e) {
             System.out.println("Document builder failed to be built.");
+            return null;
+        } catch (IOException e){
+            System.out.println("Response failed to retrieve content.");
+            return null;
+        } catch (SAXException e){
+            System.out.println("Document builder was unsuccessful in parsing response content.");
+            return null;
         }
 
-        // TODO: finish building document, possibly switch to JAXB for building the XML, then XPATH to navigate.
+        System.out.println("Retrieved document of type " + document.getDoctype());
+        // TODO: finish resolving the document received, possibly switch to JAXB for building the XML document instead of DOM, then XPATH to navigate.
         return null;
-
     }
 
     public String extractParameter(String url, String parameter, String[] parameterValues){
