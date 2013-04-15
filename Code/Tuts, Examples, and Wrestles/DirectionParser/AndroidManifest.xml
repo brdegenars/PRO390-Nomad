@@ -6,7 +6,9 @@
     <application
             android:icon="@drawable/icon"
             android:label="@string/app_name">
-        <activity android:name=".Service.Activities.SendRequestTEST">
+        <activity
+                android:name=".Service.Activities.TestRequest"
+                android:label="requestTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
