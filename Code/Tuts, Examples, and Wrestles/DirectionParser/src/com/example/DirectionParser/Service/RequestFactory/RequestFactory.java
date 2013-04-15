@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +25,7 @@ import java.util.Map;
  */
 public class RequestFactory {
 
-    private Map<String, String[]> requestParameters;
+    protected Map<String, String[]> requestParameters;
 
     private static final int STATUS_CODE_OK = 200;
 
@@ -36,16 +37,19 @@ public class RequestFactory {
         requestParameters.put("units", null);
     }
 
-    public HttpRequest getRequest(){
+    public HttpResponse getRequest(List<String[]> parameterValues){
 
         String url = "https://maps.googleapis.com/maps/api/directions/";
 
+        int valueIndex = 0;
         for(String parameter : requestParameters.keySet()){
 
+            requestParameters.put(parameter, parameterValues.get(valueIndex++));
             String[] currentValue = requestParameters.get(parameter);
+
             if(currentValue != null){
                 // TODO: check from mode to units and concat onto the request the appropriate optional parameters.
-                extractParameter(url, parameter, currentValue);
+                url = extractParameter(url, parameter, currentValue);
             }
         }
 
@@ -66,11 +70,13 @@ public class RequestFactory {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
-        Document document = null;
+        Document document;
 
         try {
+
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             document = documentBuilder.parse(httpResponse.getEntity().getContent());
+
         } catch (ParserConfigurationException e) {
             System.out.println("Document builder failed to be built.");
             return null;
@@ -84,7 +90,7 @@ public class RequestFactory {
 
         System.out.println("Retrieved document of type " + document.getDoctype());
         // TODO: finish resolving the document received, possibly switch to JAXB for building the XML document instead of DOM, then XPATH to navigate.
-        return null;
+        return httpResponse;
     }
 
     public String extractParameter(String url, String parameter, String[] parameterValues){
