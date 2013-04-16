@@ -11,6 +11,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,17 +51,30 @@ public class RequestFactory {
         url = extractParameter(url, "avoid", parameterValues.get(5), false);
         url = extractParameter(url, "units", parameterValues.get(6), true);
 
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpResponse httpResponse;
+//        DefaultHttpClient httpClient = new DefaultHttpClient();
+//        HttpResponse httpResponse;
+
+        URL requestUrl;
+        URLConnection urlConnection = null;
 
         try {
-            httpResponse = httpClient.execute(new HttpPost(url));
-        } catch (IOException e) {
-            System.out.println("Couldn't execute url and successfully get a response.");
+//            httpResponse = httpClient.execute(new HttpPost(url));
+            requestUrl = new URL(url);
+            urlConnection = requestUrl.openConnection();
+            urlConnection.connect();
+
+//        } catch (IOException e) {
+        } catch (MalformedURLException e) {
+//            System.out.println("Couldn't execute url and successfully get a response.");
+            System.out.println("Invalid URL.");
             return null;
+        } catch (IOException e){
+            System.out.println("Couldn't open connection to URL");
         }
 
-        StatusLine status = httpResponse.getStatusLine();
+        System.out.println(urlConnection.getContentType());
+
+/*        StatusLine status = httpResponse.getStatusLine();
 
         if(status.getStatusCode() != STATUS_CODE_OK)
             System.out.println("Status code not ok : STATUS CODE " + status.getStatusCode());
@@ -84,8 +100,9 @@ public class RequestFactory {
         }
 
         System.out.println("Retrieved document of type " + document.getDoctype());
-        // TODO: finish resolving the document received, possibly switch to JAXB for building the XML document instead of DOM, then XPATH to navigate.
-        return httpResponse;
+*/
+      // TODO: finish resolving the document received, possibly switch to JAXB for building the XML document instead of DOM, then XPATH to navigate.
+        return null;
     }
 
     public String extractParameter(String url, String parameter, String[] parameterValues, boolean lastParam){
