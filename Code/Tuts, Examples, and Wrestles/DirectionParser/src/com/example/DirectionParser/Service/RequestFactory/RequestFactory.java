@@ -1,5 +1,6 @@
 package com.example.DirectionParser.Service.RequestFactory;
 
+import com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpPost;
@@ -41,7 +42,7 @@ public class RequestFactory {
 
     public HttpResponse makeRequest(ArrayList<String[]> parameterValues){
 
-        String url = "https://maps.googleapis.com/maps/api/directions/";
+        String url = "http://maps.googleapis.com/maps/api/directions/";
 
         url = extractParameter(url, "origin", parameterValues.get(0), false);
         url = extractParameter(url, "destination", parameterValues.get(1), false);
@@ -51,28 +52,10 @@ public class RequestFactory {
         url = extractParameter(url, "avoid", parameterValues.get(5), false);
         url = extractParameter(url, "units", parameterValues.get(6), true);
 
+        RequestAsyncTask sendRequest = new RequestAsyncTask();
+        sendRequest.execute(url);
 //        DefaultHttpClient httpClient = new DefaultHttpClient();
 //        HttpResponse httpResponse;
-
-        URL requestUrl;
-        URLConnection urlConnection = null;
-
-        try {
-//            httpResponse = httpClient.execute(new HttpPost(url));
-            requestUrl = new URL(url);
-            urlConnection = requestUrl.openConnection();
-            urlConnection.connect();
-
-//        } catch (IOException e) {
-        } catch (MalformedURLException e) {
-//            System.out.println("Couldn't execute url and successfully get a response.");
-            System.out.println("Invalid URL.");
-            return null;
-        } catch (IOException e){
-            System.out.println("Couldn't open connection to URL");
-        }
-
-        System.out.println(urlConnection.getContentType());
 
 /*        StatusLine status = httpResponse.getStatusLine();
 

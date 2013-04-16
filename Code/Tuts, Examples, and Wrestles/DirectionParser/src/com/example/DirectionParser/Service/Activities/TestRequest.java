@@ -26,7 +26,7 @@ public class TestRequest extends Activity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serviceRequest.request("Toronto","New York",false, null, null, "metric");
+                serviceRequest.request("Toronto","Boston",false, null, null, "metric");
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.DirectionParser.Service.com.example.DirectionParser.Constants;
+package com.example.DirectionParser.Service.Constants;
 
 /**
  * Created with IntelliJ IDEA.
