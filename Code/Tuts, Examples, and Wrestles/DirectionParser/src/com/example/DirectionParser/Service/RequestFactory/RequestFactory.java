@@ -1,9 +1,8 @@
 package com.example.DirectionParser.Service.RequestFactory;
 
-import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -14,7 +13,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,14 +40,19 @@ public class RequestFactory {
 
         String url = "https://maps.googleapis.com/maps/api/directions/";
 
-        url = extractParameter(url, "mode", parameterValues.get(0));
-        url = extractParameter(url, "waypoints", parameterValues.get(1));
+        url = extractParameter(url, "origin", parameterValues.get(0), false);
+        url = extractParameter(url, "destination", parameterValues.get(1), false);
+        url = extractParameter(url, "sensor", parameterValues.get(2), false);
+        url = extractParameter(url, "mode", parameterValues.get(3), false);
+//        url = extractParameter(url, "waypoints", parameterValues.get(4), false);
+        url = extractParameter(url, "avoid", parameterValues.get(5), false);
+        url = extractParameter(url, "units", parameterValues.get(6), true);
 
         DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpResponse httpResponse;
 
         try {
-            httpResponse = httpClient.execute(new HttpGet(url));
+            httpResponse = httpClient.execute(new HttpPost(url));
         } catch (IOException e) {
             System.out.println("Couldn't execute url and successfully get a response.");
             return null;
@@ -85,7 +88,7 @@ public class RequestFactory {
         return httpResponse;
     }
 
-    public String extractParameter(String url, String parameter, String[] parameterValues){
+    public String extractParameter(String url, String parameter, String[] parameterValues, boolean lastParam){
 
         if(parameter.equals("way-points") && parameterValues.length > 1){
 
@@ -96,7 +99,9 @@ public class RequestFactory {
 
             url = url.concat(parameterValues[parameterValues.length-1] + "&");
         } else
-            url = url.concat(parameter + "=" + parameterValues[0] + "&");
+            url = url.concat(parameter + "=" + parameterValues[0]);
+
+        if(!lastParam) url = url.concat("&");
 
         return url;
     }

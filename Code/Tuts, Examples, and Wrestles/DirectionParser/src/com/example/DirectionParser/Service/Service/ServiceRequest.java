@@ -31,6 +31,7 @@ public class ServiceRequest {
         paramValues.add(new String[]{origin});
         paramValues.add(new String[] {destination});
         paramValues.add(new String[] {String.valueOf(sensor)});
+        paramValues.add(new String[]{transitMode});
         paramValues.add(waypoints);
         paramValues.add(new String[] {avoid});
         paramValues.add(new String[] {units});
