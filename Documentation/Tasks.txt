@@ -9,7 +9,8 @@ TODO		- defaults should show up
 TODO		- blank pads should still show
 
 TODO	Parse navigation data from one point to another
-TODO		- Create http request based on optional paramaters selected
+DONE		- Create http request based on optional paramaters selected
+TODO			- fix request sent with url data
 TODO		- Send request and get the returning data
 TODO		- Pase data via some service (JAXB or XPATH)
 TODO			- do refresher research on JAXB and XPATH
