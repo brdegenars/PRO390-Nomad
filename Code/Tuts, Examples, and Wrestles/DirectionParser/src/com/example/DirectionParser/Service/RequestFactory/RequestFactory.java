@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,21 +38,12 @@ public class RequestFactory {
         requestParameters.put("units", null);
     }
 
-    public HttpResponse getRequest(List<String[]> parameterValues){
+    public HttpResponse makeRequest(ArrayList<String[]> parameterValues){
 
         String url = "https://maps.googleapis.com/maps/api/directions/";
 
-        int valueIndex = 0;
-        for(String parameter : requestParameters.keySet()){
-
-            requestParameters.put(parameter, parameterValues.get(valueIndex++));
-            String[] currentValue = requestParameters.get(parameter);
-
-            if(currentValue != null){
-                // TODO: check from mode to units and concat onto the request the appropriate optional parameters.
-                url = extractParameter(url, parameter, currentValue);
-            }
-        }
+        url = extractParameter(url, "mode", parameterValues.get(0));
+        url = extractParameter(url, "waypoints", parameterValues.get(1));
 
         DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpResponse httpResponse;
@@ -99,15 +91,13 @@ public class RequestFactory {
 
             url = url.concat(parameter + "=" + parameterValues[0] + "|");
 
-            for(int i = 1; i < parameterValues.length - 1; i++){
+            for(int i = 1; i < parameterValues.length - 1; i++)
                 url = url.concat(parameterValues[i] + "|");
-            }
 
             url = url.concat(parameterValues[parameterValues.length-1] + "&");
-            return url;
-        }
+        } else
+            url = url.concat(parameter + "=" + parameterValues[0] + "&");
 
-        url = url.concat(parameter + "=" + parameterValues[0] + "&");
         return url;
     }
 }

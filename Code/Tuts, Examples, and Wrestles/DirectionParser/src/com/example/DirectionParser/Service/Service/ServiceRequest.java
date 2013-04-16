@@ -20,13 +20,13 @@ public class ServiceRequest {
 
     public void request(String origin, String destination, boolean sensor, String[] waypoints, String avoid, String units){
 
-        List<String[]> paramValues = setRequestedParameters(origin, destination, sensor, waypoints, avoid, units);
-        requestFactory.getRequest(paramValues);
+        ArrayList<String[]> paramValues = setRequestedParameters(origin, destination, sensor, waypoints, avoid, units);
+        requestFactory.makeRequest(paramValues);
     }
 
-    private List<String[]> setRequestedParameters(String origin, String destination, boolean sensor, String[] waypoints, String avoid, String units) {
+    private ArrayList<String[]> setRequestedParameters(String origin, String destination, boolean sensor, String[] waypoints, String avoid, String units) {
 
-        List<String[]> paramValues = new ArrayList<String[]>();
+        ArrayList<String[]> paramValues = new ArrayList<String[]>();
 
         paramValues.add(new String[]{origin});
         paramValues.add(new String[] {destination});
