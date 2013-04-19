@@ -1,6 +1,7 @@
 package Components;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
@@ -15,14 +16,14 @@ import android.widget.ImageButton;
  */
 public class HotPad extends ImageButton{
 
-    private Bitmap displayImage = null;
+    public HotPad(Context context) {
+        super(context);
 
-    public HotPad(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
         this.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                Intent.createChooser(new Intent(Intent.ACTION_CHOOSER), "Select Application");
+                return true;
             }
         });
     }

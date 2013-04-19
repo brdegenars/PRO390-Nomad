@@ -20,8 +20,6 @@ import java.util.logging.XMLFormatter;
  */
 public class RequestAsyncTask extends AsyncTask<String, String, Xml>{
 
-    public static final int STATUS_CODE_OK = 200;
-
     @Override
     protected Xml doInBackground(String[] params) {
 
