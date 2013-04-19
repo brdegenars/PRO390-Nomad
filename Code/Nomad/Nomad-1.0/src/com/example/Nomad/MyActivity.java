@@ -2,6 +2,7 @@ package com.example.Nomad;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 public class MyActivity extends Activity
 {
@@ -11,5 +12,8 @@ public class MyActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        ImageButton topLeft = (ImageButton)this.findViewById(R.id.imageButton_home_topLeft);
+
     }
 }

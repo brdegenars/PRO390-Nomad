@@ -42,20 +42,26 @@
                 android:layout_width="140dp"
                 android:layout_height="85dp"
                 android:id="@+id/imageButton_home_topLeft"
-                android:layout_column="0"/>
+                android:layout_column="0"
+                android:clickable="true"
+                android:longClickable="true"/>
 
         <ImageButton
                 android:layout_width="140dp"
                 android:layout_height="85dp"
                 android:id="@+id/imageButton_home_topCenter"
                 android:layout_column="1"
-                android:adjustViewBounds="false"/>
+                android:adjustViewBounds="false"
+                android:longClickable="true"
+                android:clickable="true"/>
 
         <ImageButton
                 android:layout_width="140dp"
                 android:layout_height="85dp"
                 android:id="@+id/imageButton_home_topRight"
-                android:layout_column="2"/>
+                android:layout_column="2"
+                android:clickable="true"
+                android:longClickable="true"/>
     </TableRow>
 
     <TableRow
@@ -67,19 +73,25 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/imageButton_home_bottomLeft"
-                android:layout_column="0"/>
+                android:layout_column="0"
+                android:clickable="true"
+                android:longClickable="true"/>
 
         <ImageButton
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/imageButton_home_bottomCenter"
-                android:layout_column="1"/>
+                android:layout_column="1"
+                android:clickable="true"
+                android:longClickable="true"/>
 
         <ImageButton
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/imageButton_home_bottomRight"
-                android:layout_column="2"/>
+                android:layout_column="2"
+                android:clickable="true"
+                android:longClickable="true"/>
     </TableRow>
 
     <TableRow

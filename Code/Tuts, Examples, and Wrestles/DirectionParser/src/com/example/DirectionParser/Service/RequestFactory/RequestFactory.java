@@ -42,7 +42,7 @@ public class RequestFactory {
 
     public HttpResponse makeRequest(ArrayList<String[]> parameterValues){
 
-        String url = "http://maps.googleapis.com/maps/api/directions/";
+        String url = "http://maps.googleapis.com/maps/api/directions/xml?";
 
         url = extractParameter(url, "origin", parameterValues.get(0), false);
         url = extractParameter(url, "destination", parameterValues.get(1), false);
