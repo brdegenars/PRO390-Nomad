@@ -10,9 +10,16 @@ TODO		- blank pads should still show
 
 TODO	Parse navigation data from one point to another
 DONE		- Create http request based on optional paramaters selected
-TODO			- fix request sent with url data
-TODO		- Send request and get the returning data
+DONE			- fix request sent with url data
+DONE		- Send request and get the returning data
 TODO		- Pase data via some service (JAXB or XPATH)
-TODO			- do refresher research on JAXB and XPATH
+DONE			- do refresher research on JAXB and XPATH
 TODO	Take parsed info and translate into model data
 TODO	Take model data and display it on an actual map
+
+WEEK 3
+
+TODO	Make requests to google, bing, and mapquest services regarding traffic data
+TODO	Consume data, translate into some kind of domain model
+TODO	Research on displaying data on a Map of some sort
+TODO	Show map with data
