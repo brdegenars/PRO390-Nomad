@@ -2,8 +2,6 @@ package Components;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 

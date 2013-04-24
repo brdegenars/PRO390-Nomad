@@ -57,6 +57,14 @@ public class RequestAsyncTask extends AsyncTask<String, String, Xml>{
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
+        String currentLine = null;
+        try {
+            while ((currentLine = bufferedReader.readLine()) != null)
+                System.out.println(currentLine);
+            return null;
+        } catch (IOException e) {
+            System.out.println("Couldn't read from bufferedReader.");
+        }
         return null;
     }
 }
