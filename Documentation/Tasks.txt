@@ -19,7 +19,9 @@ TODO	Take model data and display it on an actual map
 
 WEEK 3
 
+DONE	Explore Bing traffic services
 TODO	Make requests to google, bing, and mapquest services regarding traffic data
 TODO	Consume data, translate into some kind of domain model
 TODO	Research on displaying data on a Map of some sort
 TODO	Show map with data
+TODO	
