@@ -1,27 +1,58 @@
 Week 1 & 2
 
 DONE	Create Wireframe
+
 DONE	HUD (top and bottom margins on home screen)
+
 TODO		- display's dummy data
-DONE	Hot pads
+TODO			- Look up how to populate text fields dynamically in Android.
+  
+DONE	Create 6 Hot pads
 TODO		- should function according to requirements
-TODO		- defaults should show up
-TODO		- blank pads should still show
+TODO			- Only specifed types of applications should appear in the list of available apps
+TODO			- Holding a hot pad should allow you to bring up the aformentioned list
+TODO			- Three defualt pads should be pre loaded upon opening Nomad, but should allow for the user to change them
+
+TODO		- default hot pads display on home screen
+TODO			- Navigation (Nomad)
+TODO			- Voice dialer
+TODO			- voice search
 
 TODO	Parse navigation data from one point to another
 DONE		- Create http request based on optional paramaters selected
 DONE			- fix request sent with url data
-DONE		- Send request and get the returning data
-TODO		- Pase data via some service (JAXB or XPATH)
+
+DONE		- Send request and get returning data
+
+TODO		- Pase data via some Java service (JAXB or XPATH)
 DONE			- do refresher research on JAXB and XPATH
-TODO	Take parsed info and translate into model data
+DONE			- Successfully display data from reveived document
+
+TODO	Create domain model for parsed direction info
+TODO		- Take parsed info and translate into model data
+
 TODO	Take model data and display it on an actual map
 
 WEEK 3
 
 DONE	Explore Bing traffic services
-TODO	Make requests to google, bing, and mapquest services regarding traffic data
-TODO	Consume data, translate into some kind of domain model
-TODO	Research on displaying data on a Map of some sort
-TODO	Show map with data
+TODO		- Create and complete a tutorial for sending and receiving data from Bing
+
+TODO	Make requests to bing and mapquest services regarding traffic data
+TODO		- Bing
+TODO		- Mapquest
+
+TODO	Build domain model for traffic data
+TODO		- Model should accomated data from both Bing and Mapquest
+
+TODO	Research on displaying traffic data on a Map
+TODO		- Is this possible? Overlaying outside traffic data onto a Google map? (Look it up)
+ 
+TODO	Show map with traffic data if possible
+
+TODO 	Show map with both traffic and direction data
+
+WEEK 4
+
+TODO	Complete Week 1 - 3 Tasks
 TODO	
