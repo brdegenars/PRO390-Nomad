@@ -28,8 +28,8 @@ public class MyActivity extends Activity
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(getApplicationContext());
             appListDialogBuilder.setTitle("Choose Application");
-            // TODO: Fix this red stuff, it dooesn't like the anonymous listener for some reason
-            appListDialogBuilder.setItems(appList, new DialogInterface.OnClickListener() {
+            // TODO: Fix this red stuff, it doesn't like the anonymous listener for some reason
+            appListDialogBuilder.setItems(, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //To change body of implemented methods use File | Settings | File Templates.
