@@ -24,7 +24,7 @@ public class MyActivity extends Activity
             List appList = getPackageManager().queryIntentActivities(intent, 0);
 
             Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
-            startActivity(listOfAppsIntent);
+            startActivityForResult(listOfAppsIntent, 0);
             return true;
         }
     };
