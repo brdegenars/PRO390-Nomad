@@ -1,6 +1,7 @@
 package com.example.Nomad;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +11,31 @@ import java.util.List;
 
 public class MyActivity extends Activity
 {
+    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+
+            /* TODO: This is where the logic for displaying the list of available apps for hot pads is
+               TODO: work on this...
+             */
+
+            Intent intent = new Intent(Intent.ACTION_MAIN, null);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            List appList = getPackageManager().queryIntentActivities(intent, 0);
+
+            Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
+            startActivity(listOfAppsIntent);
+            return true;
+        }
+    };
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
         // Creation and instantiation of ImageButtons (hot pads)
         ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
 
@@ -32,25 +54,7 @@ public class MyActivity extends Activity
         bottomLeft.setOnLongClickListener(onLongClickListener);
         bottomCenter.setOnLongClickListener(onLongClickListener);
         bottomRight.setOnLongClickListener(onLongClickListener);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
     }
 
-    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
 
-            /* TODO: This is where the logic for displaying the list of available apps for hot pads is
-               TODO: work on this...
-             */
-
-            Intent intent = new Intent(Intent.ACTION_MAIN, null);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List appList = getPackageManager().queryIntentActivities(intent, 0);
-
-            //Intent.createChooser(new Intent(Intent.ACTION_CHOOSER), "Select Application");
-            return true;
-        }
-    };
 }
