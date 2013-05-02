@@ -1,7 +1,10 @@
 package com.example.Nomad;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,10 +24,21 @@ public class MyActivity extends Activity
 
             Intent intent = new Intent(Intent.ACTION_CHOOSER);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
-//            List appList = getPackageManager().queryIntentActivities(intent, 0);
+            List appList = getPackageManager().queryIntentActivities(intent, 0);
 
-            Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
-            startActivityForResult(listOfAppsIntent, 0);
+            AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+            appListDialogBuilder.setTitle("Choose Application");
+            // TODO: Fix this red stuff, it dooesn't like the anonymous listener for some reason
+            appListDialogBuilder.setItems(appList, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //To change body of implemented methods use File | Settings | File Templates.
+                }
+            });
+//
+//            Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
+//            listOfAppsIntent.
+//            startActivityForResult(listOfAppsIntent, 0);
             return true;
         }
     };
