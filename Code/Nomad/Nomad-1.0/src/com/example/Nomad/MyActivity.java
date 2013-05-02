@@ -19,9 +19,9 @@ public class MyActivity extends Activity
                TODO: work on this...
              */
 
-            Intent intent = new Intent(Intent.ACTION_MAIN, null);
+            Intent intent = new Intent(Intent.ACTION_CHOOSER);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List appList = getPackageManager().queryIntentActivities(intent, 0);
+//            List appList = getPackageManager().queryIntentActivities(intent, 0);
 
             Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
             startActivityForResult(listOfAppsIntent, 0);
@@ -47,6 +47,7 @@ public class MyActivity extends Activity
         bottomCenter = (ImageButton)this.findViewById(R.id.imageButton_home_bottomCenter);
         bottomRight = (ImageButton)this.findViewById(R.id.imageButton_home_bottomRight);
 
+        // Binds the above onLongClickListener to each hot pad
         topLeft.setOnLongClickListener(onLongClickListener);
         topCenter.setOnLongClickListener(onLongClickListener);
         topRight.setOnLongClickListener(onLongClickListener);
