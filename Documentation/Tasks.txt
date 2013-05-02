@@ -10,7 +10,8 @@ TODO			- Look up how to populate text fields dynamically in Android.
 DONE	Create 6 Hot pads
 TODO		- should function according to requirements
 TODO			- Only specifed types of applications should appear in the list of available apps
-TODO				- Build a custome dialog to display available applications
+DONE				- Build a custome dialog to display available applications
+TODO				- Create a list of usable application data to display in list
 DONE			- Holding a hot pad should allow you to bring up the aformentioned list
 TODO			- Three defualt pads should be pre loaded upon opening Nomad, but should allow for the user to change them
 

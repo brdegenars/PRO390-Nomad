@@ -18,24 +18,24 @@ public class MyActivity extends Activity
         @Override
         public boolean onLongClick(View v) {
 
-            /* TODO: This is where the logic for displaying the list of available apps for hot pads is
-               TODO: work on this...
-             */
-
             Intent intent = new Intent(Intent.ACTION_CHOOSER);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             List appList = getPackageManager().queryIntentActivities(intent, 0);
 
-            AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+            CharSequence[] appCharSequence = (CharSequence[])appList.toArray(new CharSequence[appList.size()]);
+
+            AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
             appListDialogBuilder.setTitle("Choose Application");
-            // TODO: Fix this red stuff, it doesn't like the anonymous listener for some reason
-            appListDialogBuilder.setItems(, new DialogInterface.OnClickListener() {
+
+            // TODO: This char sequence appCharSequence doesn't show the apps the way I'd like.
+            appListDialogBuilder.setItems(appCharSequence, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //To change body of implemented methods use File | Settings | File Templates.
+                    // TODO: Work out the logic for what I'd like to do with the app that they select from the list
                 }
             });
-//
+
+            appListDialogBuilder.show();
 //            Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
 //            listOfAppsIntent.
 //            startActivityForResult(listOfAppsIntent, 0);
