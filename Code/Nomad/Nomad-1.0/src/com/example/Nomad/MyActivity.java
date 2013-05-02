@@ -22,7 +22,11 @@ public class MyActivity extends Activity
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             List appList = getPackageManager().queryIntentActivities(intent, 0);
 
+            // TODO: This CharSequence may be empty, which would explain why it's not printing anything inside the dialog.
             CharSequence[] appCharSequence = (CharSequence[])appList.toArray(new CharSequence[appList.size()]);
+
+            for (CharSequence appChar : appCharSequence)
+                System.out.println(appChar.toString());
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
             appListDialogBuilder.setTitle("Choose Application");
