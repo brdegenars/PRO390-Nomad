@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,10 +21,15 @@ public class MyActivity extends Activity
 
             Intent intent = new Intent(Intent.ACTION_CHOOSER);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List appList = getPackageManager().queryIntentActivities(intent, 0);
+            List<ResolveInfo> appList = getPackageManager().queryIntentActivities(intent, 0);
 
+            // TODO: This should display the name of each app in the list. I read there is a high probability that there will be duplicates as well.
+            //       Also, this list may include system services or other utilities that I do not want to include in the list of selectable apps.
+            for (ResolveInfo appInfo : appList){
+                System.out.println(appInfo.loadLabel(getPackageManager()));
+            }
             // TODO: This CharSequence may be empty, which would explain why it's not printing anything inside the dialog.
-            CharSequence[] appCharSequence = (CharSequence[])appList.toArray(new CharSequence[appList.size()]);
+            CharSequence[] appCharSequence = appList.toArray(new CharSequence[appList.size()]);
 
             for (CharSequence appChar : appCharSequence)
                 System.out.println(appChar.toString());
