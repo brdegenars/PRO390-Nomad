@@ -6,11 +6,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyActivity extends Activity
@@ -19,36 +23,52 @@ public class MyActivity extends Activity
         @Override
         public boolean onLongClick(View v) {
 
-            Intent intent = new Intent(Intent.ACTION_CHOOSER);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            List<ResolveInfo> appList = getPackageManager().queryIntentActivities(intent, 0);
+            // Package contains App info
+            PackageManager packageManager = getPackageManager();
+            // App info contains....app info
+            List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
 
-            // TODO: This should display the name of each app in the list. I read there is a high probability that there will be duplicates as well.
-            //       Also, this list may include system services or other utilities that I do not want to include in the list of selectable apps.
-            for (ResolveInfo appInfo : appList){
-                System.out.println(appInfo.loadLabel(getPackageManager()));
+            // List of apps we care about
+            ArrayList<ApplicationInfo> nonSystemApplications = new ArrayList<>();
+
+            // Find the app we care about
+            for (ApplicationInfo applicationInfo : installedApplications){
+                // TODO: These flag filers work for now, but they need to be refined to further limit which applications can be chosen
+                // Apps like G-mail and maps are updated system apps, I want those.
+                if (applicationInfo.flags == ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
+                    nonSystemApplications.add(applicationInfo);
+                // Any other applications that are non system applications
+                else if (applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM)
+                    nonSystemApplications.add(applicationInfo);
             }
-            // TODO: This CharSequence may be empty, which would explain why it's not printing anything inside the dialog.
-            CharSequence[] appCharSequence = appList.toArray(new CharSequence[appList.size()]);
 
-            for (CharSequence appChar : appCharSequence)
-                System.out.println(appChar.toString());
+            // Collections holding application names and icons
+            CharSequence[] applicationNames = new CharSequence[nonSystemApplications.size()];
+            ArrayList<Drawable> applicationIcons = new ArrayList<>();
+
+            int appCount = 0;
+            // Add names and icons of non system applications to respective collections for display
+            for (ApplicationInfo applicationInfo : nonSystemApplications){
+                applicationNames[appCount++] = (packageManager.getApplicationLabel(applicationInfo));
+                applicationIcons.add(packageManager.getApplicationIcon(applicationInfo));
+            }
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
             appListDialogBuilder.setTitle("Choose Application");
 
-            // TODO: This char sequence appCharSequence doesn't show the apps the way I'd like.
-            appListDialogBuilder.setItems(appCharSequence, new DialogInterface.OnClickListener() {
+            for (int i = 0; i < nonSystemApplications.size(); i++){
+                // TODO: For each non system application, construct a list item for the dialog consisting of the application icon and name
+            }
+
+            appListDialogBuilder.setItems(applicationNames, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // TODO: Work out the logic for what I'd like to do with the app that they select from the list
+                    // TODO: This is where we need to do something with the app that the user has chosen to bind to a hot pad
+                    // Need to find a way to get the hot pad that triggered this long press event
                 }
             });
 
             appListDialogBuilder.show();
-//            Intent listOfAppsIntent = Intent.createChooser(intent, "Select Application");
-//            listOfAppsIntent.
-//            startActivityForResult(listOfAppsIntent, 0);
             return true;
         }
     };
