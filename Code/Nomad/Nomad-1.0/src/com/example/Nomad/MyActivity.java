@@ -10,22 +10,21 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyActivity extends Activity
 {
-    private LocationManager locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+    private LocationManager locationManager;
     private TextView address, cityStateZip;
-
+    private Context activityContext;
 
     /** Called when the activity is first created. */
     @Override
@@ -33,6 +32,9 @@ public class MyActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        activityContext = this.getApplicationContext();
+        locationManager  = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
 
         // Creation and instantiation of ImageButtons (hot pads)
         ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
@@ -117,9 +119,19 @@ public class MyActivity extends Activity
     };
 
     LocationListener locationListener = new LocationListener() {
+
+        Geocoder addressGeocoder;
+        List<Address> addresses;
         @Override
         public void onLocationChanged(Location location) {
             // TODO: Translate the Location object/information into a geoCoded address, set the fields that correspond on the home screen.
+            addressGeocoder = new Geocoder(activityContext);
+            try{
+            addresses = addressGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            } catch (IOException e){
+                System.out.println("SOMETHING WENT WRONG WITH GETTING THE ADDRESS FROM GEOCODER");
+            }
+            for (Address address : addresses) System.out.println(address.getAddressLine(0));
             address = null;
             cityStateZip = null;
         }
