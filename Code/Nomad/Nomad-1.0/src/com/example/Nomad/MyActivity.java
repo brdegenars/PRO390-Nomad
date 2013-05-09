@@ -10,15 +10,58 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyActivity extends Activity
 {
+    private LocationManager locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+    private TextView address, cityStateZip;
+
+
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        // Creation and instantiation of ImageButtons (hot pads)
+        ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
+
+        topLeft = (ImageButton)this.findViewById(R.id.imageButton_home_topLeft);
+        topCenter = (ImageButton)this.findViewById(R.id.imageButton_home_topCenter);
+        topRight = (ImageButton)this.findViewById(R.id.imageButton_home_topRight);
+
+        bottomLeft = (ImageButton)this.findViewById(R.id.imageButton_home_bottomLeft);
+        bottomCenter = (ImageButton)this.findViewById(R.id.imageButton_home_bottomCenter);
+        bottomRight = (ImageButton)this.findViewById(R.id.imageButton_home_bottomRight);
+
+        // Binds the onLongClickListener to each hot pad
+        topLeft.setOnLongClickListener(onLongClickListener);
+        topCenter.setOnLongClickListener(onLongClickListener);
+        topRight.setOnLongClickListener(onLongClickListener);
+
+        bottomLeft.setOnLongClickListener(onLongClickListener);
+        bottomCenter.setOnLongClickListener(onLongClickListener);
+        bottomRight.setOnLongClickListener(onLongClickListener);
+
+        // Instantiation of TextViews
+        address = (TextView)this.findViewById(R.id.textView_home_address);
+        cityStateZip = (TextView)this.findViewById(R.id.textView_home_cityStateZip);
+
+        // Register listener with locationManager
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+    }
+
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
@@ -37,7 +80,7 @@ public class MyActivity extends Activity
                 // Apps like G-mail and maps are updated system apps, I want those.
                 if (applicationInfo.flags == ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
                     nonSystemApplications.add(applicationInfo);
-                // Any other applications that are non system applications
+                    // Any other applications that are non system applications
                 else if (applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM)
                     nonSystemApplications.add(applicationInfo);
             }
@@ -73,33 +116,28 @@ public class MyActivity extends Activity
         }
     };
 
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            // TODO: Translate the Location object/information into a geoCoded address, set the fields that correspond on the home screen.
+            address = null;
+            cityStateZip = null;
+        }
 
-        // Creation and instantiation of ImageButtons (hot pads)
-        ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
+        // TODO: Decide what to do with the rest of these update methods.
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
 
-        topLeft = (ImageButton)this.findViewById(R.id.imageButton_home_topLeft);
-        topCenter = (ImageButton)this.findViewById(R.id.imageButton_home_topCenter);
-        topRight = (ImageButton)this.findViewById(R.id.imageButton_home_topRight);
+        @Override
+        public void onProviderEnabled(String provider) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
 
-        bottomLeft = (ImageButton)this.findViewById(R.id.imageButton_home_bottomLeft);
-        bottomCenter = (ImageButton)this.findViewById(R.id.imageButton_home_bottomCenter);
-        bottomRight = (ImageButton)this.findViewById(R.id.imageButton_home_bottomRight);
-
-        // Binds the above onLongClickListener to each hot pad
-        topLeft.setOnLongClickListener(onLongClickListener);
-        topCenter.setOnLongClickListener(onLongClickListener);
-        topRight.setOnLongClickListener(onLongClickListener);
-
-        bottomLeft.setOnLongClickListener(onLongClickListener);
-        bottomCenter.setOnLongClickListener(onLongClickListener);
-        bottomRight.setOnLongClickListener(onLongClickListener);
-    }
-
-
+        @Override
+        public void onProviderDisabled(String provider) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
+    };
 }
