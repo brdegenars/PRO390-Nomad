@@ -58,4 +58,8 @@ TODO 	Show map with both traffic and direction data
 WEEK 4
 
 TODO	Complete Week 1 - 3 Tasks
-TODO	
+
+WEEK 5
+
+TODO	Research on obtaining the user's location for updating the current address, city, state, and zipcode.
+TODO	Get the user's current speed and display on the home screen
