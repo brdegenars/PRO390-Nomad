@@ -63,5 +63,5 @@ WEEK 5
 
 DONE	Research on obtaining the user's location for updating the current address, city, state, and zipcode.
 DONE	Establish a connection between a local location listener and the location service provided by the device
-TODO	Display address, city, state, and zip on home screen using location data parsed into an address. 
+DONE	Display address, city, state, and zip on home screen using location data parsed into an address. 
 TODO	Get the user's current speed and display on the home screen
