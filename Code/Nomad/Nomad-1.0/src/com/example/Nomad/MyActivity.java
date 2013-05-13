@@ -89,13 +89,13 @@ public class MyActivity extends Activity
 
             // Collections holding application names and icons
             CharSequence[] applicationNames = new CharSequence[nonSystemApplications.size()];
-            ArrayList<Drawable> applicationIcons = new ArrayList<>();
+            // ArrayList<Drawable> applicationIcons = new ArrayList<>();
 
             int appCount = 0;
             // Add names and icons of non system applications to respective collections for display
             for (ApplicationInfo applicationInfo : nonSystemApplications){
                 applicationNames[appCount++] = (packageManager.getApplicationLabel(applicationInfo));
-                applicationIcons.add(packageManager.getApplicationIcon(applicationInfo));
+                // applicationIcons.add(packageManager.getApplicationIcon(applicationInfo));
             }
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
@@ -131,9 +131,13 @@ public class MyActivity extends Activity
             } catch (IOException e){
                 System.out.println("SOMETHING WENT WRONG WITH GETTING THE ADDRESS FROM GEOCODER");
             }
-            for (Address address : addresses) System.out.println(address.getAddressLine(0));
-            address = null;
-            cityStateZip = null;
+            /* Street address
+               City, State Code 6 digit zip
+               Country code
+             */
+
+            address.setText(addresses.get(0).getAddressLine(0));
+            cityStateZip.setText(addresses.get(0).getAddressLine(1));
         }
 
         // TODO: Decide what to do with the rest of these update methods.
