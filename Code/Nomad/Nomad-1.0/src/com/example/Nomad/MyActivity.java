@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -119,6 +120,7 @@ public class MyActivity extends Activity
                     ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
 
                     System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
+                    RemoteViews newRemoteView = new RemoteViews(getPackageName(), R.layout.main);
 
                     // Sets image for hot pad that fired the original event
                     currentlySelectedHotPad.setImageDrawable(itemSelected.getImageResourceDrawable());
