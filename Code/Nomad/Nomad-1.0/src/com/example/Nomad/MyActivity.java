@@ -1,20 +1,19 @@
 package com.example.Nomad;
 
 import ApplicationListAdapter.ApplicationListAdapter;
+import ApplicationListAdapter.ApplicationListItem;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.location.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -26,6 +25,7 @@ public class MyActivity extends Activity
     private LocationManager locationManager;
     private TextView address, cityStateZip;
     private Context activityContext;
+    private ImageButton currentlySelectedHotPad;
 
     /** Called when the activity is first created. */
     @Override
@@ -37,7 +37,18 @@ public class MyActivity extends Activity
         activityContext = this.getApplicationContext();
         locationManager  = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
 
-        // Creation and instantiation of ImageButtons (hot pads)
+        // Creation and instantiation of Hot pads (ImageButtons)
+        initializeHotPads();
+
+        // Instantiation of TextViews
+        address = (TextView)this.findViewById(R.id.textView_home_address);
+        cityStateZip = (TextView)this.findViewById(R.id.textView_home_cityStateZip);
+
+        // Register listener with locationManager
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+    }
+
+    private void initializeHotPads() {
         ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
 
         topLeft = (ImageButton)this.findViewById(R.id.imageButton_home_topLeft);
@@ -56,22 +67,14 @@ public class MyActivity extends Activity
         bottomLeft.setOnLongClickListener(onLongClickListener);
         bottomCenter.setOnLongClickListener(onLongClickListener);
         bottomRight.setOnLongClickListener(onLongClickListener);
-
-        // Instantiation of TextViews
-        address = (TextView)this.findViewById(R.id.textView_home_address);
-        cityStateZip = (TextView)this.findViewById(R.id.textView_home_cityStateZip);
-
-        // Register listener with locationManager
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-
-            // Package contains App info
+            // Stores the hot pad that fired the event
+            currentlySelectedHotPad = (ImageButton)v;
             PackageManager packageManager = getPackageManager();
-            // App info contains....app info
             List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
 
             // List of apps we care about
@@ -79,7 +82,7 @@ public class MyActivity extends Activity
 
             // Find the app we care about
             for (ApplicationInfo applicationInfo : installedApplications){
-                // TODO: These flag filers work for now, but they need to be refined to further limit which applications can be chosen
+                // TODO: These flag filers currently do not work as expected.
                 // Apps like G-mail and maps are updated system apps, I want those.
                 System.out.println(applicationInfo.name + "'s Flags : " + applicationInfo.flags);
                 if (applicationInfo.flags == ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
@@ -89,32 +92,36 @@ public class MyActivity extends Activity
                     nonSystemApplications.add(applicationInfo);
             }
 
-            System.out.println("Is the same collection: " + nonSystemApplications.containsAll(installedApplications));
+            // Tests to see if any applications were filtered by the flag filter process above
+            System.out.println("Is the same collection: " + installedApplications.containsAll(nonSystemApplications));
 
             // Collections holding application names and icons
-            CharSequence[] applicationNames = new CharSequence[nonSystemApplications.size()];
-            // ArrayList<Drawable> applicationIcons = new ArrayList<>();
+            ApplicationListItem[] applicationListItems = new ApplicationListItem[nonSystemApplications.size()];
 
             int appCount = 0;
             // Add names and icons of non system applications to respective collections for display
             for (ApplicationInfo applicationInfo : nonSystemApplications){
-                applicationNames[appCount++] = (packageManager.getApplicationLabel(applicationInfo));
-                // applicationIcons.add(packageManager.getApplicationIcon(applicationInfo));
+                CharSequence applicationLabel = (packageManager.getApplicationLabel(applicationInfo));
+                Drawable applicationIcon = (packageManager.getApplicationIcon(applicationInfo));
+
+                applicationListItems[appCount++] = new ApplicationListItem(applicationLabel, applicationIcon);
             }
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
-            appListDialogBuilder.setTitle("Choose Application");
-            appListDialogBuilder.setAdapter(new ApplicationListAdapter(this, R.layout.applicationList, ))
+            appListDialogBuilder.setTitle("Pick One");
 
-            for (int i = 0; i < nonSystemApplications.size(); i++){
-                // TODO: For each non system application, construct a list item for the dialog consisting of the application icon and name
-            }
+            ApplicationListAdapter applicationListAdapter = new ApplicationListAdapter(v.getContext(), R.layout.applicationlistitem, applicationListItems);
 
-            appListDialogBuilder.setItems(applicationNames, new DialogInterface.OnClickListener() {
+            appListDialogBuilder.setAdapter(applicationListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // TODO: This is where we need to do something with the app that the user has chosen to bind to a hot pad
-                    // Need to find a way to get the hot pad that triggered this long press event
+                    ListView applicationListView = ((AlertDialog)dialog).getListView();
+                    ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
+
+                    System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
+
+                    // Sets image for hot pad that fired the original event
+                    currentlySelectedHotPad.setImageDrawable(itemSelected.getImageResourceDrawable());
                 }
             });
 
@@ -127,20 +134,22 @@ public class MyActivity extends Activity
 
         Geocoder addressGeocoder;
         List<Address> addresses;
+
         @Override
         public void onLocationChanged(Location location) {
-            // TODO: Translate the Location object/information into a geoCoded address, set the fields that correspond on the home screen.
+
             addressGeocoder = new Geocoder(activityContext);
+
             try{
             addresses = addressGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             } catch (IOException e){
                 System.out.println("SOMETHING WENT WRONG WITH GETTING THE ADDRESS FROM GEOCODER");
             }
+
             /* Street address
                City, State Code 6 digit zip
                Country code
              */
-
             address.setText(addresses.get(0).getAddressLine(0));
             cityStateZip.setText(addresses.get(0).getAddressLine(1));
         }

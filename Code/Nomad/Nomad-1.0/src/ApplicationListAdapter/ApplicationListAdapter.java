@@ -1,12 +1,14 @@
 package ApplicationListAdapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
+import com.example.Nomad.R;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,13 +19,47 @@ import java.util.List;
  */
 public class ApplicationListAdapter extends ArrayAdapter<ApplicationListItem> {
 
-    public ApplicationListAdapter(Context context, int resource, int textViewResourceId, List<ApplicationListItem> objects) {
-        super(context, resource, textViewResourceId, objects);
+    private Context context;
+    private int layoutResourceId;
+    private ApplicationListItem[] applicationListItems;
+
+    public ApplicationListAdapter(Context context, int layoutResourceId, ApplicationListItem[] itemData) {
+        super(context, layoutResourceId, itemData);
+
+        this.context = context;
+        this.layoutResourceId = layoutResourceId;
+        this.applicationListItems = itemData;
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
 
-        View view = super.getView(position,convertView,parent);
-        TextView textView = (TextView)view.findViewById(R.id)
+        View rowItem = convertView;
+        ApplicationListItemPlaceholder listItemPlaceholder;
+
+        if (rowItem == null){
+
+            LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
+            rowItem = layoutInflater.inflate(layoutResourceId, parent, false);
+
+            listItemPlaceholder = new ApplicationListItemPlaceholder();
+            listItemPlaceholder.imageView = (ImageView)rowItem.findViewById(R.id.applicationListItemImage);
+            listItemPlaceholder.textView = (TextView)rowItem.findViewById(R.id.applicationListItemText);
+
+            rowItem.setTag(listItemPlaceholder);
+        } else {
+            listItemPlaceholder = (ApplicationListItemPlaceholder)rowItem.getTag();
+        }
+
+        ApplicationListItem applicationListItem = applicationListItems[position];
+        listItemPlaceholder.imageView.setImageDrawable(applicationListItem.getImageResourceDrawable());
+        listItemPlaceholder.textView.setText(applicationListItem.getApplicationName());
+
+        return rowItem;
+    }
+
+    static class ApplicationListItemPlaceholder {
+
+        ImageView imageView;
+        TextView textView;
     }
 }

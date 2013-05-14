@@ -1,5 +1,7 @@
 package ApplicationListAdapter;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: brdegenaars
@@ -9,15 +11,19 @@ package ApplicationListAdapter;
  */
 public class ApplicationListItem {
 
-    private final String applicationName;
-    private final int icon;
+    private final CharSequence applicationName;
+    private final Drawable icon;
 
-    public ApplicationListItem(String applicationName, int icon){
+    public ApplicationListItem(CharSequence applicationName, Drawable icon){
         this.applicationName = applicationName;
         this.icon = icon;
     }
 
-    public String getApplicationName(){
+    public CharSequence getApplicationName(){
         return applicationName;
+    }
+
+    public Drawable getImageResourceDrawable(){
+        return icon;
     }
 }

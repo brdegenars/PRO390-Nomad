@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nomad</string>
-    <string name="address">Address</string>
-    <string name="cityStateZip">City, State Zip</string>
     <string name="speed">Speed</string>
     <string name="timeElapsed">Time Elapsed : </string>
     <string name="driveTime">Drive Time : </string>
