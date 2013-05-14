@@ -4,8 +4,8 @@ DONE	Create Wireframe
 
 DONE	HUD (top and bottom margins on home screen)
 
-TODO		- display's dummy data
-TODO			- Look up how to populate text fields dynamically in Android.
+DONE		- display's dummy data
+DONE			- Look up how to populate text fields dynamically in Android.
   
 DONE	Create 6 Hot pads
 TODO		- should function according to requirements
@@ -65,3 +65,8 @@ DONE	Research on obtaining the user's location for updating the current address,
 DONE	Establish a connection between a local location listener and the location service provided by the device
 DONE	Display address, city, state, and zip on home screen using location data parsed into an address. 
 TODO	Get the user's current speed and display on the home screen
+
+WEEK 6
+
+DONE	Create custom application list view
+DONE 	

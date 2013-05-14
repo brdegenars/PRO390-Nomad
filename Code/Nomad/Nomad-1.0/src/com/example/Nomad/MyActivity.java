@@ -1,5 +1,6 @@
 package com.example.Nomad;
 
+import ApplicationListAdapter.ApplicationListAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -80,12 +81,15 @@ public class MyActivity extends Activity
             for (ApplicationInfo applicationInfo : installedApplications){
                 // TODO: These flag filers work for now, but they need to be refined to further limit which applications can be chosen
                 // Apps like G-mail and maps are updated system apps, I want those.
+                System.out.println(applicationInfo.name + "'s Flags : " + applicationInfo.flags);
                 if (applicationInfo.flags == ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
                     nonSystemApplications.add(applicationInfo);
                     // Any other applications that are non system applications
                 else if (applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM)
                     nonSystemApplications.add(applicationInfo);
             }
+
+            System.out.println("Is the same collection: " + nonSystemApplications.containsAll(installedApplications));
 
             // Collections holding application names and icons
             CharSequence[] applicationNames = new CharSequence[nonSystemApplications.size()];
@@ -100,6 +104,7 @@ public class MyActivity extends Activity
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
             appListDialogBuilder.setTitle("Choose Application");
+            appListDialogBuilder.setAdapter(new ApplicationListAdapter(this, R.layout.applicationList, ))
 
             for (int i = 0; i < nonSystemApplications.size(); i++){
                 // TODO: For each non system application, construct a list item for the dialog consisting of the application icon and name
