@@ -31,6 +31,10 @@ public class Hotpad extends ImageButton{
         super(context);
     }
 
+    public ImageButton getImageButton(){
+        return hotpad;
+    }
+
     public void setApplication(String packageName){
         this.packageName = packageName;
         hotpad.setOnClickListener(executeBoundApplication);

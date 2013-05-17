@@ -146,7 +146,7 @@ public class MyActivity extends Activity
                     applicationListView.getAdapter().getItem(which);
                     // Sets image for hot pad that fired the original event
                     currentlySelectedHotPad.setApplication(itemSelected.getPackageName());
-                    currentlySelectedHotPad.setImageDrawable(itemSelected.getImageResourceDrawable());
+                    currentlySelectedHotPad.getImageButton().setImageDrawable(itemSelected.getImageResourceDrawable());
                 }
             });
 
