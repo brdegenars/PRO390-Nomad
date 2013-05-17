@@ -20,14 +20,19 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MyActivity extends Activity
 {
+    private final int NUMBER_OF_HOTPADS = 6;
+
     private LocationManager locationManager;
     private TextView address, cityStateZip;
     private Context activityContext;
-    private ImageButton currentlySelectedHotPad;
+    private Hotpad currentlySelectedHotPad;
+
+    private HashMap<ImageButton, Hotpad> hotPads = new HashMap<>(NUMBER_OF_HOTPADS);
 
     /** Called when the activity is first created. */
     @Override
@@ -54,12 +59,22 @@ public class MyActivity extends Activity
         ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
 
         topLeft = (ImageButton)this.findViewById(R.id.imageButton_home_topLeft);
+        hotPads.put(topLeft, new Hotpad(this, topLeft));
+
         topCenter = (ImageButton)this.findViewById(R.id.imageButton_home_topCenter);
+        hotPads.put(topCenter, new Hotpad(this, topCenter));
+
         topRight = (ImageButton)this.findViewById(R.id.imageButton_home_topRight);
+        hotPads.put(topRight, new Hotpad(this, topRight));
 
         bottomLeft = (ImageButton)this.findViewById(R.id.imageButton_home_bottomLeft);
+        hotPads.put(bottomLeft, new Hotpad(this, bottomLeft));
+
         bottomCenter = (ImageButton)this.findViewById(R.id.imageButton_home_bottomCenter);
+        hotPads.put(bottomCenter, new Hotpad(this, bottomCenter));
+
         bottomRight = (ImageButton)this.findViewById(R.id.imageButton_home_bottomRight);
+        hotPads.put(bottomRight, new Hotpad(this, bottomRight));
 
         // Binds the onLongClickListener to each hot pad
         topLeft.setOnLongClickListener(onLongClickListener);
@@ -69,21 +84,15 @@ public class MyActivity extends Activity
         bottomLeft.setOnLongClickListener(onLongClickListener);
         bottomCenter.setOnLongClickListener(onLongClickListener);
         bottomRight.setOnLongClickListener(onLongClickListener);
-
-        topLeft = new Hotpad(this, topLeft);
-        topCenter = new Hotpad(this, topCenter);
-        topLeft = new Hotpad(this, topRight);
-
-        bottomLeft = new Hotpad(this, bottomLeft);
-        bottomCenter = new Hotpad(this, bottomCenter);
-        bottomRight = new Hotpad(this, bottomRight);
     }
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
             // Stores the hot pad that fired the event
-            currentlySelectedHotPad = (ImageButton)v;
+            ImageButton hotPadImageButton = (ImageButton)v;
+            currentlySelectedHotPad = hotPads.get(hotPadImageButton);
+
             PackageManager packageManager = getPackageManager();
             List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
 
@@ -112,9 +121,10 @@ public class MyActivity extends Activity
             // Add names and icons of non system applications to respective collections for display
             for (ApplicationInfo applicationInfo : nonSystemApplications){
                 CharSequence applicationLabel = (packageManager.getApplicationLabel(applicationInfo));
+                String applicationPackageName = (applicationInfo.packageName);
                 Drawable applicationIcon = (packageManager.getApplicationIcon(applicationInfo));
 
-                applicationListItems[appCount++] = new ApplicationListItem(applicationLabel, applicationIcon);
+                applicationListItems[appCount++] = new ApplicationListItem(applicationLabel, applicationPackageName, applicationIcon);
             }
 
             AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
@@ -131,9 +141,11 @@ public class MyActivity extends Activity
                     System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
                     // TODO: Enable the ability to retain the application icon on each hotpad upon rotation of the screen.
                     // May require building two layouts for each orientation of the screen.
-                    RemoteViews newRemoteView = new RemoteViews(getPackageName(), R.layout.main);
+                    // RemoteViews newRemoteView = new RemoteViews(getPackageName(), R.layout.main);
 
+                    applicationListView.getAdapter().getItem(which);
                     // Sets image for hot pad that fired the original event
+                    currentlySelectedHotPad.setApplication(itemSelected.getPackageName());
                     currentlySelectedHotPad.setImageDrawable(itemSelected.getImageResourceDrawable());
                 }
             });
