@@ -69,7 +69,7 @@ TODO	Get the user's current speed and display on the home screen
 WEEK 6
 
 DONE	Create custom application list view
-TODO 	Display application icon on hot pad
+DONE 	Display application icon on hot pad
 DONE 	Application launches upon being selected after being bound to hot pad
 TODO	Takes in route origin from user in nav utility
 TODO	" destination "
