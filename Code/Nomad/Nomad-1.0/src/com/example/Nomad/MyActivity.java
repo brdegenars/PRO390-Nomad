@@ -2,6 +2,7 @@ package com.example.Nomad;
 
 import ApplicationListAdapter.ApplicationListAdapter;
 import ApplicationListAdapter.ApplicationListItem;
+import Components.Hotpad;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -68,13 +69,21 @@ public class MyActivity extends Activity
         bottomLeft.setOnLongClickListener(onLongClickListener);
         bottomCenter.setOnLongClickListener(onLongClickListener);
         bottomRight.setOnLongClickListener(onLongClickListener);
+
+        topLeft = new Hotpad(this, topLeft);
+        topCenter = new Hotpad(this, topCenter);
+        topLeft = new Hotpad(this, topRight);
+
+        bottomLeft = new Hotpad(this, bottomLeft);
+        bottomCenter = new Hotpad(this, bottomCenter);
+        bottomRight = new Hotpad(this, bottomRight);
     }
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
             // Stores the hot pad that fired the event
-            currentlySelectedHotPad = (ImageButton)v;
+            currentlySelectedHotPad = (Hotpad)v;
             PackageManager packageManager = getPackageManager();
             List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
 
