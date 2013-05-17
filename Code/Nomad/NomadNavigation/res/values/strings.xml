@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NomadNavigation</string>
+    <string name="app_name">Nomad Navigation</string>
+
+    <string name="origin">Origin : </string>
+    <string name="destination">Destination : </string>
+    <string name="navigate">Navigate Me</string>
 </resources>
