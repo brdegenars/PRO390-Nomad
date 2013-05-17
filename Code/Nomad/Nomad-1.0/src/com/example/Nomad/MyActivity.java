@@ -2,7 +2,7 @@ package com.example.Nomad;
 
 import ApplicationListAdapter.ApplicationListAdapter;
 import ApplicationListAdapter.ApplicationListItem;
-import Components.Hotpad;
+import Components.*;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -83,7 +83,7 @@ public class MyActivity extends Activity
         @Override
         public boolean onLongClick(View v) {
             // Stores the hot pad that fired the event
-            currentlySelectedHotPad = (Hotpad)v;
+            currentlySelectedHotPad = (ImageButton)v;
             PackageManager packageManager = getPackageManager();
             List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
 
@@ -129,6 +129,8 @@ public class MyActivity extends Activity
                     ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
 
                     System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
+                    // TODO: Enable the ability to retain the application icon on each hotpad upon rotation of the screen.
+                    // May require building two layouts for each orientation of the screen.
                     RemoteViews newRemoteView = new RemoteViews(getPackageName(), R.layout.main);
 
                     // Sets image for hot pad that fired the original event
