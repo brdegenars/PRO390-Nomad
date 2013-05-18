@@ -1,7 +1,6 @@
 package observer;
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -14,18 +13,20 @@ import android.widget.EditText;
 public class LocationTextObserver {
 
     private EditText originInput, destinationInput;
+    private Button componentAffected;
 
-    public LocationTextObserver(EditText origin, EditText destination){
+    public LocationTextObserver(EditText origin, EditText destination, Button componentAffected){
         this.originInput = origin;
         this.destinationInput = destination;
+        this.componentAffected = componentAffected;
     }
 
     public void update(){
 
         if (originInput.getText().length() < 1 || destinationInput.getText().length() < 1){
-            // TODO: disables navigate button
+            componentAffected.setEnabled(false);
         } else {
-            // TODO: enables navigate button
+            componentAffected.setEnabled(true);
         }
 
     }
