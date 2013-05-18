@@ -31,7 +31,9 @@ public class NavigationPrompt extends Activity {
         @Override
         public void onClick(View v) {
             // TODO: Take origin and destination, send to Google direction service, display map.
-            originInput.getText();
+            System.out.println("INPUTS: ");
+            System.out.println("Origin : " + originInput.getText());
+            System.out.println("Destination : " + destinationInput.getText());
         }
     };
 }

@@ -3,7 +3,6 @@ package com.example.DirectionParser.Service.Service;
 import com.example.DirectionParser.Service.RequestFactory.RequestFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +13,7 @@ import java.util.List;
  */
 public class ServiceRequest {
 
-    private final String transitMode = "driving";
+    private final String TRANSIT_MODE = "driving";
 
     private RequestFactory requestFactory = new RequestFactory();
 
@@ -31,7 +30,7 @@ public class ServiceRequest {
         paramValues.add(new String[]{origin});
         paramValues.add(new String[] {destination});
         paramValues.add(new String[] {String.valueOf(sensor)});
-        paramValues.add(new String[]{transitMode});
+        paramValues.add(new String[]{TRANSIT_MODE});
         paramValues.add(waypoints);
         paramValues.add(new String[] {avoid});
         paramValues.add(new String[] {units});
