@@ -3,6 +3,8 @@ package com.activites;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 public class NavigationPrompt extends Activity {
 
     private EditText originInput, destinationInput;
+    private Button navigateMe;
 
     /**
      * Called when the activity is first created.
@@ -22,7 +25,7 @@ public class NavigationPrompt extends Activity {
         originInput = (EditText)this.findViewById(R.id.originInput);
         destinationInput = (EditText)this.findViewById(R.id.destinationInput);
 
-        Button navigateMe = (Button)this.findViewById(R.id.navigateMe);
+        navigateMe = (Button)this.findViewById(R.id.navigateMe);
         navigateMe.setOnClickListener(navigateMeOnClickListener);
         // navigateMe.setEnabled(false);
     }
