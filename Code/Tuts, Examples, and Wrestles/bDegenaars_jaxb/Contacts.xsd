@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="myContacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="contact" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+<xs:element name="contact">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element ref="address" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="address">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="address1" type="xs:string"/>
+      <xs:element name="address2" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="state" type="xs:string"/>
+      <xs:element name="zip" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>
+

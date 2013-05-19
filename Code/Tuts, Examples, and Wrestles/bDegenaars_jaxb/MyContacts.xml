@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<myContacts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Contacts.xsd">
+  <contact>
+    <name>Jake Walkenhorst</name>
+    <email>jwalkenhorst@neumont.edu</email>
+    <address>
+      <address1>Neumont University</address1>
+      <address2>10701 Riverfront Pkwy. Suite 300</address2>
+      <city>South Jordan</city>
+      <state>UT</state>
+      <zip>84095</zip>
+    </address>
+  </contact>
+  <contact>
+  	<name>Joe Student</name>
+  	<email>jstudent@student.neumont.edu</email>
+  	<address>
+  		<address1>1234 Easy St.</address1>
+  		<address2></address2>
+  		<city>Nowhere</city>
+  		<state>USA</state>
+  		<zip>00000</zip>
+  	</address>
+  </contact>
+  <contact>
+  	<name>Timmy Smithy</name>
+  	<email>timmy@gmail.com</email>
+  	<address>
+  		<address1>1313 Mockingbird Ln.</address1>
+  		<address2></address2>
+  		<city>Muenster</city>
+  		<state>OH</state>
+  		<zip>22334</zip>
+  	</address>  	
+  </contact>
+</myContacts>

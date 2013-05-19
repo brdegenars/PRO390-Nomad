@@ -71,6 +71,15 @@ WEEK 6
 DONE	Create custom application list view
 DONE 	Display application icon on hot pad
 DONE 	Application launches upon being selected after being bound to hot pad
-TODO	Takes in route origin from user in nav utility
-TODO	" destination "
+DONE	Takes in route origin from user in nav utility
+DONE	" destination "
 TODO	Displays a map with the aformentioned route
+
+WEEK 7
+
+TODO	Consume Traffic data from a 3rd party source
+TODO	Display traffic data on a map (if possible)
+			- Display data in some visual way
+TODO	Use previous consumtion method for extracting directions
+TODO	Alter a given route
+TODO	Display altered route

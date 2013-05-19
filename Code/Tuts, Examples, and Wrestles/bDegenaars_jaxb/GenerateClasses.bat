@@ -1,0 +1,1 @@
+"C:\Program Files\Java\jdk1.6.0_22\bin\xjc.exe" -p generated Contacts.xsd -d src
