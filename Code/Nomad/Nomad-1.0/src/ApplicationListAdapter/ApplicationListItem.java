@@ -12,11 +12,17 @@ import android.graphics.drawable.Drawable;
 public class ApplicationListItem {
 
     private final CharSequence applicationName;
+    private final String packageName;
     private final Drawable icon;
 
-    public ApplicationListItem(CharSequence applicationName, Drawable icon){
+    public ApplicationListItem(CharSequence applicationName, String packageName, Drawable icon){
         this.applicationName = applicationName;
+        this.packageName = packageName;
         this.icon = icon;
+    }
+
+    public String getPackageName(){
+        return packageName.toString();
     }
 
     public CharSequence getApplicationName(){
