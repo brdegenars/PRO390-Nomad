@@ -2,6 +2,7 @@ package com.activites;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,6 +47,8 @@ public class NavigationPrompt extends Activity {
             System.out.println("INPUTS: ");
             System.out.println("Origin : " + originInput.getText());
             System.out.println("Destination : " + destinationInput.getText());
+
+            Intent launchMapIntent = Intent.getIntent(Intent.ACTION_MAIN);
         }
     };
 }

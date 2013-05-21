@@ -37,15 +37,16 @@
             android:layout_margin="5dp">
 
         <ImageButton
-                android:layout_width="140dp"
+                android:layout_width="fill_parent"
                 android:layout_height="85dp"
                 android:id="@+id/imageButton_home_topLeft"
                 android:layout_column="0"
                 android:clickable="true"
-                android:longClickable="true"/>
+                android:longClickable="true"
+                android:contentDescription=""/>
 
         <ImageButton
-                android:layout_width="140dp"
+                android:layout_width="fill_parent"
                 android:layout_height="85dp"
                 android:id="@+id/imageButton_home_topCenter"
                 android:layout_column="1"
@@ -54,7 +55,7 @@
                 android:clickable="true"/>
 
         <ImageButton
-                android:layout_width="140dp"
+                android:layout_width="fill_parent"
                 android:layout_height="85dp"
                 android:id="@+id/imageButton_home_topRight"
                 android:layout_column="2"
