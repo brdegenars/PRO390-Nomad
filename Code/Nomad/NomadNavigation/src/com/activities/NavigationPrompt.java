@@ -31,7 +31,7 @@ public class NavigationPrompt extends Activity {
 
         Button navigateMe = (Button) this.findViewById(R.id.navigateMe);
         navigateMe.setOnClickListener(navigateMeOnClickListener);
-        navigateMe.setEnabled(false);
+        //navigateMe.setEnabled(false);
 
         LocationTextObserver locationTextObserver = new LocationTextObserver(originInput, destinationInput, navigateMe);
 

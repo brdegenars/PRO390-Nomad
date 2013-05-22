@@ -179,20 +179,13 @@ public class MyActivity extends Activity
             cityStateZip.setText(addresses.get(0).getAddressLine(1));
         }
 
-        // TODO: Decide what to do with the rest of these update methods.
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            //To change body of implemented methods use File | Settings | File Templates.
-        }
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
 
         @Override
-        public void onProviderEnabled(String provider) {
-            //To change body of implemented methods use File | Settings | File Templates.
-        }
+        public void onProviderEnabled(String provider) {}
 
         @Override
-        public void onProviderDisabled(String provider) {
-            //To change body of implemented methods use File | Settings | File Templates.
-        }
+        public void onProviderDisabled(String provider) {}
     };
 }
