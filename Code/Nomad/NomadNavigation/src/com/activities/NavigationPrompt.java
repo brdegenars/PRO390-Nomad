@@ -1,11 +1,8 @@
-package com.activites;
+package com.activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,9 +22,11 @@ public class NavigationPrompt extends Activity {
         setContentView(R.layout.main);
 
         originInput = (EditText)this.findViewById(R.id.originInput);
+        originInput.setText("Origin");
         LocationTextSubject originSubject = new LocationTextSubject(originInput);
 
         destinationInput = (EditText)this.findViewById(R.id.destinationInput);
+        destinationInput.setText("Destination");
         LocationTextSubject destinationSubject = new LocationTextSubject(destinationInput);
 
         Button navigateMe = (Button) this.findViewById(R.id.navigateMe);
@@ -48,7 +47,8 @@ public class NavigationPrompt extends Activity {
             System.out.println("Origin : " + originInput.getText());
             System.out.println("Destination : " + destinationInput.getText());
 
-            Intent launchMapIntent = Intent.getIntent(Intent.ACTION_MAIN);
+            Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
+            startActivity(launchMapIntent);
         }
     };
 }
