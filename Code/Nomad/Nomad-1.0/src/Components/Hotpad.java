@@ -3,8 +3,11 @@ package Components;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageButton;
+
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,10 +16,11 @@ import android.widget.ImageButton;
  * Time: 9:48 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Hotpad extends ImageButton{
+public class Hotpad extends ImageButton implements Serializable{
 
     private ImageButton hotpad;
     private String packageName;
+    private Drawable applicationIcon;
 
     public Hotpad(Context context, ImageButton hotpad) {
         super(context);
@@ -35,8 +39,18 @@ public class Hotpad extends ImageButton{
         return hotpad;
     }
 
-    public void setApplication(String packageName){
+    public String getBoundApplication(){
+        return packageName;
+    }
+
+    public Drawable getApplicationIcon(){
+        return applicationIcon;
+    }
+
+    public void setApplication(String packageName, Drawable applicationIcon){
         this.packageName = packageName;
+        this.applicationIcon = applicationIcon;
+        hotpad.setImageDrawable(applicationIcon);
         hotpad.setOnClickListener(executeBoundApplication);
     }
 

@@ -27,10 +27,10 @@ public class MyActivity extends Activity
 {
     private final int NUMBER_OF_HOTPADS = 6;
 
-    private LocationManager locationManager;
     private TextView address, cityStateZip;
-    private Context activityContext;
-    private Hotpad currentlySelectedHotPad;
+    private Context activityContext = null;
+    private Hotpad currentlySelectedHotPad = null;
+    private AlertDialog.Builder appListDialogBuilder = null;
 
     private HashMap<ImageButton, Hotpad> hotPads = new HashMap<>(NUMBER_OF_HOTPADS);
 
@@ -42,10 +42,10 @@ public class MyActivity extends Activity
         setContentView(R.layout.main);
 
         activityContext = this.getApplicationContext();
-        locationManager  = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         // Creation and instantiation of Hot pads (ImageButtons)
-        initializeHotPads();
+        initializeHotPads(savedInstanceState);
 
         // Instantiation of TextViews
         address = (TextView)this.findViewById(R.id.textView_home_address);
@@ -55,26 +55,39 @@ public class MyActivity extends Activity
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
-    private void initializeHotPads() {
+    @Override
+    protected void onSaveInstanceState(final Bundle savedInstance){
+        savedInstance.putSerializable("hotPads", hotPads);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initializeHotPads(final Bundle savedInstanceState) {
         ImageButton topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight;
 
         topLeft = (ImageButton)this.findViewById(R.id.imageButton_home_topLeft);
-        hotPads.put(topLeft, new Hotpad(this, topLeft));
-
         topCenter = (ImageButton)this.findViewById(R.id.imageButton_home_topCenter);
-        hotPads.put(topCenter, new Hotpad(this, topCenter));
-
         topRight = (ImageButton)this.findViewById(R.id.imageButton_home_topRight);
-        hotPads.put(topRight, new Hotpad(this, topRight));
-
         bottomLeft = (ImageButton)this.findViewById(R.id.imageButton_home_bottomLeft);
-        hotPads.put(bottomLeft, new Hotpad(this, bottomLeft));
-
         bottomCenter = (ImageButton)this.findViewById(R.id.imageButton_home_bottomCenter);
-        hotPads.put(bottomCenter, new Hotpad(this, bottomCenter));
-
         bottomRight = (ImageButton)this.findViewById(R.id.imageButton_home_bottomRight);
+
+        hotPads.put(topLeft, new Hotpad(this, topLeft));
+        hotPads.put(topCenter, new Hotpad(this, topCenter));
+        hotPads.put(topRight, new Hotpad(this, topRight));
+        hotPads.put(bottomLeft, new Hotpad(this, bottomLeft));
+        hotPads.put(bottomCenter, new Hotpad(this, bottomCenter));
         hotPads.put(bottomRight, new Hotpad(this, bottomRight));
+
+        if (savedInstanceState != null){
+            HashMap<ImageButton, Hotpad> oldHotpads = (HashMap<ImageButton, Hotpad>) savedInstanceState.getSerializable("hotPads");
+
+            if (oldHotpads != null){
+                Hotpad[] oldHotpadValues = oldHotpads.values().toArray(new Hotpad[NUMBER_OF_HOTPADS]);
+                int i = 0;
+                for (Hotpad currentHotpad : hotPads.values())
+                    currentHotpad.setApplication(oldHotpadValues[i].getBoundApplication(), oldHotpadValues[i++].getApplicationIcon());
+            }
+        }
 
         // Binds the onLongClickListener to each hot pad
         topLeft.setOnLongClickListener(onLongClickListener);
@@ -86,72 +99,74 @@ public class MyActivity extends Activity
         bottomRight.setOnLongClickListener(onLongClickListener);
     }
 
+    private void buildApplicationListDialog(View v){
+
+        // Stores the hot pad that fired the event
+        ImageButton hotPadImageButton = (ImageButton)v;
+        currentlySelectedHotPad = hotPads.get(hotPadImageButton);
+
+        PackageManager packageManager = getPackageManager();
+        List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
+
+        // List of apps we care about
+        ArrayList<ApplicationInfo> nonSystemApplications = new ArrayList<>();
+
+        // Find the app we care about
+        for (ApplicationInfo applicationInfo : installedApplications){
+            // TODO: These flag filers currently do not work as expected.
+            // Apps like G-mail and maps are updated system apps, I want those.
+            System.out.println(applicationInfo.name + "'s Flags : " + applicationInfo.flags);
+            if (applicationInfo.flags == ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
+                nonSystemApplications.add(applicationInfo);
+                // Any other applications that are non system applications
+            else if (applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM)
+                nonSystemApplications.add(applicationInfo);
+        }
+
+        // Tests to see if any applications were filtered by the flag filter process above
+        System.out.println("Is the same collection: " + installedApplications.containsAll(nonSystemApplications));
+
+        // Collections holding application names and icons
+        ApplicationListItem[] applicationListItems = new ApplicationListItem[nonSystemApplications.size()];
+
+        int appCount = 0;
+        // Add names and icons of non system applications to respective collections for display
+        for (ApplicationInfo applicationInfo : nonSystemApplications){
+            CharSequence applicationLabel = (packageManager.getApplicationLabel(applicationInfo));
+            String applicationPackageName = (applicationInfo.packageName);
+            Drawable applicationIcon = (packageManager.getApplicationIcon(applicationInfo));
+
+            applicationListItems[appCount++] = new ApplicationListItem(applicationLabel, applicationPackageName, applicationIcon);
+        }
+
+        appListDialogBuilder = new AlertDialog.Builder(v.getContext());
+        appListDialogBuilder.setTitle("Pick One");
+
+        ApplicationListAdapter applicationListAdapter = new ApplicationListAdapter(v.getContext(), R.layout.applicationlistitem, applicationListItems);
+
+        appListDialogBuilder.setAdapter(applicationListAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ListView applicationListView = ((AlertDialog)dialog).getListView();
+                ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
+
+                System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
+
+                //applicationListView.getAdapter().getItem(which);
+                // Sets image for hot pad that fired the original event
+                currentlySelectedHotPad.setApplication(itemSelected.getPackageName(), itemSelected.getImageResourceDrawable());
+            }
+        });
+    }
+
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            // Stores the hot pad that fired the event
-            ImageButton hotPadImageButton = (ImageButton)v;
-            currentlySelectedHotPad = hotPads.get(hotPadImageButton);
 
-            PackageManager packageManager = getPackageManager();
-            List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
+        if (appListDialogBuilder == null) buildApplicationListDialog(v);
 
-            // List of apps we care about
-            ArrayList<ApplicationInfo> nonSystemApplications = new ArrayList<>();
-
-            // Find the app we care about
-            for (ApplicationInfo applicationInfo : installedApplications){
-                // TODO: These flag filers currently do not work as expected.
-                // Apps like G-mail and maps are updated system apps, I want those.
-                System.out.println(applicationInfo.name + "'s Flags : " + applicationInfo.flags);
-                if (applicationInfo.flags == ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
-                    nonSystemApplications.add(applicationInfo);
-                    // Any other applications that are non system applications
-                else if (applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM)
-                    nonSystemApplications.add(applicationInfo);
-            }
-
-            // Tests to see if any applications were filtered by the flag filter process above
-            System.out.println("Is the same collection: " + installedApplications.containsAll(nonSystemApplications));
-
-            // Collections holding application names and icons
-            ApplicationListItem[] applicationListItems = new ApplicationListItem[nonSystemApplications.size()];
-
-            int appCount = 0;
-            // Add names and icons of non system applications to respective collections for display
-            for (ApplicationInfo applicationInfo : nonSystemApplications){
-                CharSequence applicationLabel = (packageManager.getApplicationLabel(applicationInfo));
-                String applicationPackageName = (applicationInfo.packageName);
-                Drawable applicationIcon = (packageManager.getApplicationIcon(applicationInfo));
-
-                applicationListItems[appCount++] = new ApplicationListItem(applicationLabel, applicationPackageName, applicationIcon);
-            }
-
-            AlertDialog.Builder appListDialogBuilder = new AlertDialog.Builder(v.getContext());
-            appListDialogBuilder.setTitle("Pick One");
-
-            ApplicationListAdapter applicationListAdapter = new ApplicationListAdapter(v.getContext(), R.layout.applicationlistitem, applicationListItems);
-
-            appListDialogBuilder.setAdapter(applicationListAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ListView applicationListView = ((AlertDialog)dialog).getListView();
-                    ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
-
-                    System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
-                    // TODO: Enable the ability to retain the application icon on each hotpad upon rotation of the screen.
-                    // May require building two layouts for each orientation of the screen.
-                    // RemoteViews newRemoteView = new RemoteViews(getPackageName(), R.layout.main);
-
-                    applicationListView.getAdapter().getItem(which);
-                    // Sets image for hot pad that fired the original event
-                    currentlySelectedHotPad.setApplication(itemSelected.getPackageName());
-                    currentlySelectedHotPad.getImageButton().setImageDrawable(itemSelected.getImageResourceDrawable());
-                }
-            });
-
-            appListDialogBuilder.show();
-            return true;
+        appListDialogBuilder.show();
+        return true;
         }
     };
 
