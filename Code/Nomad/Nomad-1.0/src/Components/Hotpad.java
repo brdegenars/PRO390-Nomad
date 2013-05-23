@@ -21,11 +21,13 @@ public class Hotpad extends ImageButton implements Serializable{
     private ImageButton hotpad;
     private String packageName;
     private Drawable applicationIcon;
+    private int position;
 
-    public Hotpad(Context context, ImageButton hotpad) {
+    public Hotpad(Context context, ImageButton hotpad, int position) {
         super(context);
 
-        this.hotpad = hotpad;
+        setHotpad(hotpad);
+        this.position = position;
     }
 
     /* This constructor is required by ImageButton super class, but I don't want anyone using it;
@@ -52,6 +54,10 @@ public class Hotpad extends ImageButton implements Serializable{
         this.applicationIcon = applicationIcon;
         hotpad.setImageDrawable(applicationIcon);
         hotpad.setOnClickListener(executeBoundApplication);
+    }
+
+    public void setHotpad(ImageButton hotpad){
+        this.hotpad = hotpad;
     }
 
     private OnClickListener executeBoundApplication = new OnClickListener() {

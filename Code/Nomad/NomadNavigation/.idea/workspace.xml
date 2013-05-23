@@ -37,7 +37,7 @@
     </list>
     <ignored path="NomadNavigation.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369267787393" ignored="false" />
+    <file path="/Dummy.txt" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369270630651" ignored="false" />
     <file path="/strings.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368821523097" ignored="false" />
     <file path="/main.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368841651138" ignored="false" />
     <file path="/NavigationPrompt.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369203675840" ignored="false" />
@@ -48,12 +48,12 @@
     <file path="$PROJECT_DIR$/../Nomad-1.0/src/com/example/Nomad_1_0/MyActivity.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368925119974" ignored="false" />
     <file path="/ApplicationListAdapter.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368925479689" ignored="false" />
     <file path="/fragment.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369267616643" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369267637874" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369282367667" ignored="false" />
     <file path="/mapDisplay.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369177805306" ignored="false" />
     <file path="/MapHandler.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369265350086" ignored="false" />
     <file path="/map_display.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369253665459" ignored="false" />
-    <file path="/MyActivity.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369270160922" ignored="false" />
-    <file path="/Hotpad.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369268784214" ignored="false" />
+    <file path="/MyActivity.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369286658666" ignored="false" />
+    <file path="/Hotpad.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369283678333" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +126,7 @@
       <file leaf-file-name="MapHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/activities/MapHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1327" selection-end="1327" vertical-scroll-proportion="0.5544101">
+            <state line="39" column="0" selection-start="1327" selection-end="1327" vertical-scroll-proportion="0.5979381">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -864,7 +864,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/activities/MapHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1327" selection-end="1327" vertical-scroll-proportion="0.5544101">
+        <state line="39" column="0" selection-start="1327" selection-end="1327" vertical-scroll-proportion="0.5979381">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

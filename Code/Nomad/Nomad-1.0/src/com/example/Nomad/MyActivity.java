@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -26,13 +25,21 @@ import java.util.List;
 public class MyActivity extends Activity
 {
     private final int NUMBER_OF_HOTPADS = 6;
+    private final int TOP_LEFT = 0;
+    private final int TOP_CENTER = 1;
+    private final int TOP_RIGHT = 2;
+    private final int BOTTOM_LEFT = 3;
+    private final int BOTTOM_CENTER = 4;
+    private final int BOTTOM_RIGHT = 5;
 
     private TextView address, cityStateZip;
     private Context activityContext = null;
     private Hotpad currentlySelectedHotPad = null;
     private AlertDialog.Builder appListDialogBuilder = null;
+    private ApplicationListItem[] applicationListItems = null;
 
-    private HashMap<ImageButton, Hotpad> hotPads = new HashMap<>(NUMBER_OF_HOTPADS);
+    private HashMap<Integer, Hotpad> hotPads = new HashMap<>(NUMBER_OF_HOTPADS);
+    private ImageButton[] imageButtons = new ImageButton[NUMBER_OF_HOTPADS];
 
     /** Called when the activity is first created. */
     @Override
@@ -57,7 +64,12 @@ public class MyActivity extends Activity
 
     @Override
     protected void onSaveInstanceState(final Bundle savedInstance){
-        savedInstance.putSerializable("hotPads", hotPads);
+
+        Hotpad[] persistentHotpads = new Hotpad[NUMBER_OF_HOTPADS];
+
+        for(int i = TOP_LEFT; i <= BOTTOM_RIGHT; i++) persistentHotpads[i] = hotPads.get(i);
+
+        savedInstance.putSerializable("hotpads", persistentHotpads);
     }
 
     @SuppressWarnings("unchecked")
@@ -71,39 +83,34 @@ public class MyActivity extends Activity
         bottomCenter = (ImageButton)this.findViewById(R.id.imageButton_home_bottomCenter);
         bottomRight = (ImageButton)this.findViewById(R.id.imageButton_home_bottomRight);
 
-        hotPads.put(topLeft, new Hotpad(this, topLeft));
-        hotPads.put(topCenter, new Hotpad(this, topCenter));
-        hotPads.put(topRight, new Hotpad(this, topRight));
-        hotPads.put(bottomLeft, new Hotpad(this, bottomLeft));
-        hotPads.put(bottomCenter, new Hotpad(this, bottomCenter));
-        hotPads.put(bottomRight, new Hotpad(this, bottomRight));
-
-        if (savedInstanceState != null){
-            HashMap<ImageButton, Hotpad> oldHotpads = (HashMap<ImageButton, Hotpad>) savedInstanceState.getSerializable("hotPads");
-
-            if (oldHotpads != null){
-                Hotpad[] oldHotpadValues = oldHotpads.values().toArray(new Hotpad[NUMBER_OF_HOTPADS]);
-                int i = 0;
-                for (Hotpad currentHotpad : hotPads.values())
-                    currentHotpad.setApplication(oldHotpadValues[i].getBoundApplication(), oldHotpadValues[i++].getApplicationIcon());
-            }
-        }
+        imageButtons[TOP_LEFT] = topLeft;
+        imageButtons[TOP_CENTER] = topCenter;
+        imageButtons[TOP_RIGHT] = topRight;
+        imageButtons[BOTTOM_LEFT] = bottomLeft;
+        imageButtons[BOTTOM_CENTER] = bottomCenter;
+        imageButtons[BOTTOM_RIGHT] = bottomRight;
 
         // Binds the onLongClickListener to each hot pad
-        topLeft.setOnLongClickListener(onLongClickListener);
-        topCenter.setOnLongClickListener(onLongClickListener);
-        topRight.setOnLongClickListener(onLongClickListener);
+        for (ImageButton imageButton : imageButtons) imageButton.setOnLongClickListener(onLongClickListener);
 
-        bottomLeft.setOnLongClickListener(onLongClickListener);
-        bottomCenter.setOnLongClickListener(onLongClickListener);
-        bottomRight.setOnLongClickListener(onLongClickListener);
+        if (savedInstanceState != null){
+            Hotpad[] oldHotpadData = ((Hotpad[]) savedInstanceState.getSerializable("hotpads"));
+
+            for (int i = TOP_LEFT; i <= BOTTOM_RIGHT; i++){
+                if (oldHotpadData[i].getBoundApplication() != null){
+                    System.out.println("TEST **  " + i + ". " + oldHotpadData[i].getBoundApplication());
+
+                    Hotpad tempHotpad = new Hotpad(this, imageButtons[i], i);
+                    tempHotpad.setApplication(oldHotpadData[i].getBoundApplication(), oldHotpadData[i].getApplicationIcon());
+
+                    hotPads.put(i, tempHotpad);
+                } else
+                    hotPads.put(i, new Hotpad(this, imageButtons[i], i));
+            }
+        }else for (int i = TOP_LEFT; i <= BOTTOM_RIGHT; i++) hotPads.put(i, new Hotpad(this, imageButtons[i], i));
     }
 
-    private void buildApplicationListDialog(View v){
-
-        // Stores the hot pad that fired the event
-        ImageButton hotPadImageButton = (ImageButton)v;
-        currentlySelectedHotPad = hotPads.get(hotPadImageButton);
+    private void buildApplicationDialogList(View v){
 
         PackageManager packageManager = getPackageManager();
         List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(0);
@@ -127,7 +134,7 @@ public class MyActivity extends Activity
         System.out.println("Is the same collection: " + installedApplications.containsAll(nonSystemApplications));
 
         // Collections holding application names and icons
-        ApplicationListItem[] applicationListItems = new ApplicationListItem[nonSystemApplications.size()];
+        applicationListItems = new ApplicationListItem[nonSystemApplications.size()];
 
         int appCount = 0;
         // Add names and icons of non system applications to respective collections for display
@@ -138,35 +145,43 @@ public class MyActivity extends Activity
 
             applicationListItems[appCount++] = new ApplicationListItem(applicationLabel, applicationPackageName, applicationIcon);
         }
-
-        appListDialogBuilder = new AlertDialog.Builder(v.getContext());
-        appListDialogBuilder.setTitle("Pick One");
-
-        ApplicationListAdapter applicationListAdapter = new ApplicationListAdapter(v.getContext(), R.layout.applicationlistitem, applicationListItems);
-
-        appListDialogBuilder.setAdapter(applicationListAdapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ListView applicationListView = ((AlertDialog)dialog).getListView();
-                ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
-
-                System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
-
-                //applicationListView.getAdapter().getItem(which);
-                // Sets image for hot pad that fired the original event
-                currentlySelectedHotPad.setApplication(itemSelected.getPackageName(), itemSelected.getImageResourceDrawable());
-            }
-        });
     }
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
 
-        if (appListDialogBuilder == null) buildApplicationListDialog(v);
+            // Stores the hot pad that fired the event
+            ImageButton hotPadImageButton = (ImageButton)v;
 
-        appListDialogBuilder.show();
-        return true;
+            int currentHotpadPosition = -1;
+            for (int i = TOP_LEFT; i <= BOTTOM_RIGHT; i++) if (imageButtons[i] == hotPadImageButton) currentHotpadPosition = i;
+
+            currentlySelectedHotPad = hotPads.get(currentHotpadPosition);
+
+            if (applicationListItems == null) buildApplicationDialogList(v);
+
+                appListDialogBuilder = new AlertDialog.Builder(v.getContext());
+                appListDialogBuilder.setTitle("Pick One");
+
+                ApplicationListAdapter applicationListAdapter = new ApplicationListAdapter(v.getContext(), R.layout.applicationlistitem, applicationListItems);
+
+                appListDialogBuilder.setAdapter(applicationListAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ListView applicationListView = ((AlertDialog)dialog).getListView();
+                        ApplicationListItem itemSelected = (ApplicationListItem)applicationListView.getAdapter().getItem(which);
+
+                        System.out.println("SELECTED APPLICATION : " + itemSelected.getApplicationName());
+
+                        //applicationListView.getAdapter().getItem(which);
+                        // Sets image for hot pad that fired the original event
+                        currentlySelectedHotPad.setApplication(itemSelected.getPackageName(), itemSelected.getImageResourceDrawable());
+                    }
+                });
+
+            appListDialogBuilder.show();
+            return true;
         }
     };
 
