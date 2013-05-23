@@ -30,16 +30,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09f48c9d-a4dc-4712-bf68-80cea394e9c8" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\brdegenaars\Documents\Capstone\Code\Nomad\Nomad-1.0\res\layout\applicationListItem.xml" afterPath="$PROJECT_DIR$/../Nomad-1.0/res/layout/applicationlistitem.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Nomad-1.0/out/production/Nomad-1.0/com/example/Nomad/MyActivity$1$1.class" afterPath="$PROJECT_DIR$/../Nomad-1.0/out/production/Nomad-1.0/com/example/Nomad/MyActivity$1$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Nomad-1.0/out/production/Nomad-1.0/com/example/Nomad/MyActivity$2.class" afterPath="$PROJECT_DIR$/../Nomad-1.0/out/production/Nomad-1.0/com/example/Nomad/MyActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Nomad-1.0/src/com/example/Nomad/MyActivity.java" afterPath="$PROJECT_DIR$/../Nomad-1.0/src/com/example/Nomad/MyActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Nomad-1.0/res/layout/main.xml" afterPath="$PROJECT_DIR$/../Nomad-1.0/res/layout/main.xml" />
     </list>
     <ignored path="NomadNavigation.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369288294530" ignored="false" />
+    <file path="/Dummy.txt" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369288697769" ignored="false" />
     <file path="/strings.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368821523097" ignored="false" />
-    <file path="/main.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368841651138" ignored="false" />
+    <file path="/main.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369290575032" ignored="false" />
     <file path="/NavigationPrompt.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369203675840" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369206135268" ignored="false" />
     <file path="/LocationTextWatcher.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368916317844" ignored="false" />
@@ -48,7 +47,7 @@
     <file path="$PROJECT_DIR$/../Nomad-1.0/src/com/example/Nomad_1_0/MyActivity.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368925119974" ignored="false" />
     <file path="/ApplicationListAdapter.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1368925479689" ignored="false" />
     <file path="/fragment.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369267616643" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369288316595" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369290627868" ignored="false" />
     <file path="/mapDisplay.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369177805306" ignored="false" />
     <file path="/MapHandler.java" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369265350086" ignored="false" />
     <file path="/map_display.xml" changelist="09f48c9d-a4dc-4712-bf68-80cea394e9c8" time="1369253665459" ignored="false" />
