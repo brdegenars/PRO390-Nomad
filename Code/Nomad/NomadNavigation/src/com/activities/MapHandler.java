@@ -31,17 +31,30 @@ public class MapHandler extends Activity {
 
         LocationManager locationManager  = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, currentLocationListener);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
 
         navigationMap = ((MapFragment)getFragmentManager().findFragmentById(R.id.mapDisplay)).getMap();
 
         navigationMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         navigationMap.setMyLocationEnabled(true);
+        navigationMap.setTrafficEnabled(true);
     }
 
     private LocationListener currentLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            navigationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15));
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15);
+            //navigationMap.moveCamera(update);
+            navigationMap.animateCamera(update);
         }
 
         @Override
@@ -53,4 +66,6 @@ public class MapHandler extends Activity {
         @Override
         public void onProviderDisabled(String provider) {}
     };
+
+
 }

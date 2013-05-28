@@ -2,6 +2,7 @@ package com.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,12 @@ public class NavigationPrompt extends Activity {
             System.out.println("INPUTS: ");
             System.out.println("Origin : " + originInput.getText());
             System.out.println("Destination : " + destinationInput.getText());
+
+            SharedPreferences localData = getPreferences(Activity.MODE_PRIVATE);
+            SharedPreferences.Editor localDataEditor = localData.edit();
+
+            localDataEditor.putString("origin", originInput.getText().toString());
+            localDataEditor.putString("destination", destinationInput.getText().toString());
 
             Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
             startActivity(launchMapIntent);

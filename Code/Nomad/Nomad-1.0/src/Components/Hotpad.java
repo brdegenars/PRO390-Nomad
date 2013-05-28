@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -16,7 +18,7 @@ import java.io.Serializable;
  * Time: 9:48 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Hotpad extends ImageButton implements Serializable{
+public class Hotpad extends ImageButton implements Parcelable{
 
     private ImageButton hotpad;
     private String packageName;
@@ -69,4 +71,18 @@ public class Hotpad extends ImageButton implements Serializable{
             homeScreen.startActivity(launchBoundApplicationIntent);
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(hotpad);
+        dest.writeString(packageName);
+        dest.writeValue(applicationIcon);
+        dest.writeInt(position);
+        // TODO: finish impelmenting parciable. Figure out how to write the hotpad objects correctly.
+    }
 }

@@ -70,6 +70,7 @@ public class MyActivity extends Activity
         for(int i = TOP_LEFT; i <= BOTTOM_RIGHT; i++) persistentHotpads[i] = hotPads.get(i);
 
         savedInstance.putSerializable("hotpads", persistentHotpads);
+        savedInstance.putParcelable("hotpads", persistentHotpads);
     }
 
     @SuppressWarnings("unchecked")
