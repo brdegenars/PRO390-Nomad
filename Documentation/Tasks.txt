@@ -51,7 +51,7 @@ TODO		- Model should accomated data from both Bing and Mapquest
 TODO	Research on displaying traffic data on a Map
 TODO		- Is this possible? Overlaying outside traffic data onto a Google map? (Look it up)
  
-TODO	Show map with traffic data if possible
+DONE	Show map with traffic data if possible
 
 TODO 	Show map with both traffic and direction data
 
@@ -78,7 +78,7 @@ TODO	Displays a map with the aformentioned route
 WEEK 7
 
 TODO	Consume Traffic data from a 3rd party source
-TODO	Display traffic data on a map (if possible)
+DONE	Display traffic data on a map (if possible)
 			- Display data in some visual way
 TODO	Use previous consumtion method for extracting directions
 TODO	Alter a given route
