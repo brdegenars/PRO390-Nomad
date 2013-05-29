@@ -9,7 +9,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.*;
-import java.util.logging.XMLFormatter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,7 +26,6 @@ public class RequestAsyncTask extends AsyncTask<String, String, Xml>{
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse httpResponse = null;
 
-        // TODO: It doesn't like line 34 below. Find out why.
         try {
             httpResponse = httpClient.execute(httpPost);
         } catch (IOException e) {
@@ -57,7 +55,7 @@ public class RequestAsyncTask extends AsyncTask<String, String, Xml>{
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        String currentLine = null;
+        String currentLine;
         try {
             while ((currentLine = bufferedReader.readLine()) != null)
                 System.out.println(currentLine);

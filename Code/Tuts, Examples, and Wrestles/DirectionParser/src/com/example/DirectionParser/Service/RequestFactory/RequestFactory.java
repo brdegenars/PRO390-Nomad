@@ -2,22 +2,11 @@ package com.example.DirectionParser.Service.RequestFactory;
 
 import com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask;
 import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,7 +22,7 @@ public class RequestFactory {
     private static final int STATUS_CODE_OK = 200;
 
     public RequestFactory(){
-        requestParameters = new HashMap<String, String[]>();
+        requestParameters = new HashMap<>();
         requestParameters.put("mode", null);
         requestParameters.put("waypoints", null);
         requestParameters.put("avoid", null);
@@ -42,7 +31,7 @@ public class RequestFactory {
 
     public HttpResponse makeRequest(ArrayList<String[]> parameterValues){
 
-        String url = "http://maps.googleapis.com/maps/api/directions/xml?";
+        String url = "http://maps.googleapis.com/maps/api/directions/json?";
 
         url = extractParameter(url, "origin", parameterValues.get(0), false);
         url = extractParameter(url, "destination", parameterValues.get(1), false);
@@ -84,7 +73,6 @@ public class RequestFactory {
 
         System.out.println("Retrieved document of type " + document.getDoctype());
 */
-      // TODO: finish resolving the document received, possibly switch to JAXB for building the XML document instead of DOM, then XPATH to navigate.
         return null;
     }
 

@@ -5,7 +5,7 @@
       <profile>
         <option name="device" value="2.7in QVGA" />
         <option name="deviceConfiguration" value="Portrait" />
-        <option name="targetHashString" value="android-17" />
+        <option name="targetHashString" value="android-14" />
         <option name="theme" value="Theme" />
       </profile>
     </option>
@@ -24,31 +24,43 @@
     </option>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58bf7007-b717-443b-b413-321645287dc5" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\Nomad-1.0\project.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Tuts, Examples, and Wrestles\DirectionParser\src\com\example\DirectionParser\Service\Service\ServiceRequest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Nomad/Nomad-1.0/src/ApplicationListAdapter/ApplicationListItem.java" afterPath="$PROJECT_DIR$/../../Nomad/Nomad-1.0/src/ApplicationListAdapter/ApplicationListItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Nomad/Nomad-1.0/src/com/example/Nomad/MyActivity.java" afterPath="$PROJECT_DIR$/../../Nomad/Nomad-1.0/src/com/example/Nomad/MyActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../Documentation/Tasks.txt" afterPath="$PROJECT_DIR$/../../../Documentation/Tasks.txt" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\DirectionParser.iml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\gen\com\example\DirectionParser\BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\gen\com\example\DirectionParser\Manifest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\gen\com\example\DirectionParser\R.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\out\production\DirectionParser\com\example\DirectionParser\BuildConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\out\production\DirectionParser\com\example\DirectionParser\R$attr.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\out\production\DirectionParser\com\example\DirectionParser\R$drawable.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\out\production\DirectionParser\com\example\DirectionParser\R$string.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\out\production\DirectionParser\com\example\DirectionParser\R.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\project.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\res\drawable\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\brdegenaars\Documents\My Box Files\Quarter 11\PRO390\Project\PRO390-Nomad\Code\Nomad\DirectionParser\res\values\strings.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" afterPath="$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java" afterPath="$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DirectionParser.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368923015520" ignored="false" />
+    <file path="/Dummy.txt" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369785578563" ignored="false" />
     <file path="$PROJECT_DIR$/../../Nomad/Nomad-1.0/.idea/workspace.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1365742460415" ignored="false" />
     <file path="/ServiceRequest.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366086238661" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1365742460415" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/misc.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1365719020794" ignored="false" />
     <file path="/Mode.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1365719615607" ignored="false" />
     <file path="/Strings.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1365720733959" ignored="false" />
     <file path="/RequestFactory.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366144716509" ignored="false" />
-    <file path="/fragment.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366141680731" ignored="false" />
+    <file path="/fragment.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369704912499" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366061656314" ignored="false" />
     <file path="/TestRequest.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366064736342" ignored="false" />
-    <file path="/main.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368841651138" ignored="false" />
-    <file path="/strings.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366062206811" ignored="false" />
+    <file path="/main.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369706236528" ignored="false" />
+    <file path="/strings.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369705810216" ignored="false" />
     <file path="$PROJECT_DIR$/../../../../../../Sprint 1/CSC360/Projects/FactoryPattern/src/main/Client.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366141814472" ignored="false" />
     <file path="/Client.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366141654303" ignored="false" />
     <file path="$PROJECT_DIR$/../../../../../../Sprint 1/CSC360/Projects/FactoryPattern/src/factory/CandyFactory.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366141551837" ignored="false" />
@@ -63,11 +75,20 @@
     <file path="/RequestAsyncTask.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366406409261" ignored="false" />
     <file path="/MyActivity.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366406904225" ignored="false" />
     <file path="/HotPad.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1366405785543" ignored="false" />
-    <file path="/NavigationPrompt.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368916693789" ignored="false" />
+    <file path="/NavigationPrompt.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369785428780" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368840943003" ignored="false" />
     <file path="/LocationTextWatcher.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368916317844" ignored="false" />
     <file path="/LocationTextObserver.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368916310427" ignored="false" />
     <file path="/LocationTextSubject.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1368916992806" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../../../../../Capstone/Code/Nomad/NomadNavigation/src/com/activities/MapHandler.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369782404132" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../../../../../Capstone/Code/Nomad/NomadNavigation/src/com/activities/NavigationPrompt.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369785428780" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../../../../../Capstone/Code/Nomad/NomadNavigation/res/layout/main.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369706302038" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../../../../../Capstone/Code/Nomad/NomadNavigation/res/values/strings.xml" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369705810216" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../../../../../Capstone/Code/Nomad/NomadNavigation/src/service/DirectionRequest.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369785334816" ignored="false" />
+    <file path="/DirectionRequest.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369774835574" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../../../../../../Capstone/Code/Nomad/NomadNavigation/src/service/DirectionURLGenerator.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369784118532" ignored="false" />
+    <file path="/DirectionURLGenerator.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369784105823" ignored="false" />
+    <file path="/MapHandler.java" changelist="58bf7007-b717-443b-b413-321645287dc5" time="1369782355024" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,53 +103,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" line="57" class="com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask" package="com.example.DirectionParser.Service.AsyncTasks">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" line="36" class="com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask" package="com.example.DirectionParser.Service.AsyncTasks">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" line="44" class="com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask" package="com.example.DirectionParser.Service.AsyncTasks">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -165,7 +140,53 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" line="55" class="com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask" package="com.example.DirectionParser.Service.AsyncTasks">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" line="34" class="com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask" package="com.example.DirectionParser.Service.AsyncTasks">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" line="42" class="com.example.DirectionParser.Service.AsyncTasks.RequestAsyncTask" package="com.example.DirectionParser.Service.AsyncTasks">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -174,56 +195,86 @@
     <favorites_list name="DirectionParser" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TestRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Activities/TestRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="56" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state line="12" column="59" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestAsyncTask.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestFactory.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="31" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.019473081">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="TestRequest.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Activities/TestRequest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="28" column="81" selection-start="969" selection-end="969" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+              <provider editor-type-id="text-editor">
+                <state line="12" column="59" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+              <provider selected="true" editor-type-id="android-designer">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RequestAsyncTask.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="11" column="0" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Strings.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Constants/Strings.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="14" column="63" selection-start="464" selection-end="464" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="7" column="31" selection-start="284" selection-end="284" vertical-scroll-proportion="0.25">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RequestFactory.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="75" column="0" selection-start="2801" selection-end="2801" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="ServiceRequest.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Service/ServiceRequest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="32" column="49" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.70247936">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -246,11 +297,11 @@
         <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/ServiceRequest.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/Service/ServiceRequest.java" />
         <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/Activities/TestRequest.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java" />
         <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java" />
-        <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/Service/ServiceRequest.java" />
+        <option value="$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java" />
       </list>
     </option>
   </component>
@@ -299,10 +350,6 @@
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; Android 4.2.2 Platform &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -325,6 +372,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -476,19 +527,22 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Nomad/Nomad-1.0" />
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/Java/jdk1.7.0_09" />
     <property name="AndroidLayoutSelectedEditor" value="android-designer" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -628,17 +682,17 @@
     <configuration default="false" name="DirectionParser" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="DirectionParser" />
       <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="do_nothing" />
+      <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="JellBean" />
+      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
+      <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
       <option name="WIPE_USER_DATA" value="false" />
       <option name="DISABLE_BOOT_ANIMATION" value="false" />
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="CLEAR_LOGCAT" value="true" />
       <RunnerSettings RunnerId="AndroidDebugRunner" />
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
@@ -734,35 +788,55 @@
     <option name="localTasksCounter" value="15" />
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6084538" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41842398" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40044492" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41935483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41824248" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.64354324" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15048026" sideWeight="0.58064514" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.66518354" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15048026" sideWeight="0.5817575" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5817575" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.66518354" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5817575" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -850,13 +924,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="31" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Constants/Strings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="58" selection-start="492" selection-end="492" vertical-scroll-proportion="0.0">
@@ -891,18 +958,9 @@
         <state line="5" column="19" selection-start="175" selection-end="175" vertical-scroll-proportion="0.1486014" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Constants/Strings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="58" selection-start="492" selection-end="492" vertical-scroll-proportion="0.4160839">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Android/android-sdk/sources/android-17/android/os/AsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="297" column="0" selection-start="12568" selection-end="12568" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="297" column="0" selection-start="12568" selection-end="12568" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://C:/Program Files (x86)/Android/android-sdk/sources/android-17/java/net/InetAddress.java">
@@ -916,43 +974,148 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state line="12" column="59" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Service/ServiceRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0">
+        <state line="32" column="49" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.70247936">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Activities/TestRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="56" selection-start="944" selection-end="944" vertical-scroll-proportion="0.0">
+        <state line="28" column="81" selection-start="969" selection-end="969" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/Constants/Strings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="63" selection-start="464" selection-end="464" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/AsyncTasks/RequestAsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="11" column="0" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/DirectionParser/Service/RequestFactory/RequestFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="31" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.019473081">
+        <state line="75" column="0" selection-start="2801" selection-end="2801" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="31" selection-start="284" selection-end="284" vertical-scroll-proportion="0.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android (DirectionParser)|Android</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Android 4.0 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>DirectionParser</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>jdk1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
