@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
         <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_home_address"
-                android:layout_column="0"
+                android:layout_column="1"
                 android:layout_span="3"
                 android:layout_gravity="center_horizontal"/>
     </TableRow>
 
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_home_cityStateZip"
-                android:layout_column="0"
+                android:layout_column="1"
                 android:layout_span="3"
                 android:layout_gravity="center_horizontal"/>
 
     </TableRow>
 
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_margin="5dp">
 
         <ImageButton
-                android:layout_width="140dp"
+                android:layout_width="fill_parent"
                 android:layout_height="85dp"
+                android:layout_weight="1"
                 android:id="@+id/imageButton_home_topLeft"
                 android:layout_column="0"
                 android:clickable="true"
-                android:longClickable="true"/>
+                android:longClickable="true"
+                android:contentDescription=""/>
 
         <ImageButton
-                android:layout_width="140dp"
-                android:layout_height="85dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
                 android:id="@+id/imageButton_home_topCenter"
                 android:layout_column="1"
                 android:adjustViewBounds="false"
@@ -54,8 +57,9 @@
                 android:clickable="true"/>
 
         <ImageButton
-                android:layout_width="140dp"
-                android:layout_height="85dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
                 android:id="@+id/imageButton_home_topRight"
                 android:layout_column="2"
                 android:clickable="true"
@@ -63,29 +67,33 @@
     </TableRow>
 
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_margin="5dp">
 
         <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
                 android:id="@+id/imageButton_home_bottomLeft"
                 android:layout_column="0"
                 android:clickable="true"
-                android:longClickable="true"/>
+                android:longClickable="true"
+                />
 
         <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
                 android:id="@+id/imageButton_home_bottomCenter"
                 android:layout_column="1"
                 android:clickable="true"
                 android:longClickable="true"/>
 
         <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
                 android:id="@+id/imageButton_home_bottomRight"
                 android:layout_column="2"
                 android:clickable="true"
@@ -93,8 +101,9 @@
     </TableRow>
 
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom">
 
         <TextView
                 android:layout_width="fill_parent"
@@ -106,7 +115,7 @@
                 android:layout_gravity="center_horizontal"/>
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/timeElapsed"
                 android:id="@+id/textView_home_timeElapsed"
@@ -114,7 +123,7 @@
                 />
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/temp"
                 android:id="@+id/textView_home_temp"
@@ -122,11 +131,12 @@
     </TableRow>
 
     <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom">
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/driveTime"
                 android:id="@+id/textView_home_driveTime"

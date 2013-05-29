@@ -5,4 +5,7 @@
     <string name="origin">Origin : </string>
     <string name="destination">Destination : </string>
     <string name="navigate">Navigate Me</string>
+
+    <string name="destinationMapSelectionContentDescription">Selection icon, indicates user wishes to select their destination via the map.</string>
+    <string name="originMapSelectionContentDescription">Selection icon, indicates user wishes to select their origin via the map.</string>
 </resources>

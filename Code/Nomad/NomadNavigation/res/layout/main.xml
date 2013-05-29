@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/origin"
-            />
-
-    <EditText
+<TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:id="@+id/originInput"
-        />
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/destination"
-        />
+    <TableRow>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/origin"
+                />
+    </TableRow>
 
-    <EditText
+    <TableRow>
+        <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:id="@+id/destinationInput"
+            android:id="@+id/originInput"
             />
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/originMapSelection"
+                android:layout_column="1"
+                android:contentDescription="@string/originMapSelectionContentDescription"
+                android:src="@android:drawable/ic_menu_mylocation"
+                />
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/destination"
+            />
+    </TableRow>
+
+
+    <TableRow>
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/destinationInput"
+                />
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/destinationMapSelection"
+                android:layout_column="1"
+                android:contentDescription="@string/destinationMapSelectionContentDescription"
+                android:src="@android:drawable/ic_menu_mylocation"
+                />
+    </TableRow>
 
     <Button
         android:layout_width="fill_parent"
@@ -42,5 +69,5 @@
         android:id="@+id/navigateMe"
         />
 
-</LinearLayout>
+</TableLayout>
 
