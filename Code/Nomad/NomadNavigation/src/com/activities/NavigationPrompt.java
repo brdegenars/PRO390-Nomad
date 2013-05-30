@@ -17,6 +17,10 @@ import java.util.concurrent.ExecutionException;
 
 public class NavigationPrompt extends Activity {
 
+    public static final String NAV_PREFERENCES = "navPreferences";
+    public static final String NAV_ORIGIN = "origin";
+    public static final String NAV_DESTINATION = "destination";
+
     private EditText originInput, destinationInput;
 
     /**
@@ -28,21 +32,19 @@ public class NavigationPrompt extends Activity {
         setContentView(R.layout.main);
 
         originInput = (EditText)this.findViewById(R.id.originInput);
-        originInput.setText("Origin");
         LocationTextSubject originSubject = new LocationTextSubject(originInput);
 
         destinationInput = (EditText)this.findViewById(R.id.destinationInput);
-        destinationInput.setText("Destination");
         LocationTextSubject destinationSubject = new LocationTextSubject(destinationInput);
 
         Button navigateMe = (Button) this.findViewById(R.id.navigateMe);
         navigateMe.setOnClickListener(navigateMeOnClickListener);
         //navigateMe.setEnabled(false);
 
-        LocationTextObserver locationTextObserver = new LocationTextObserver(originInput, destinationInput, navigateMe);
+        LocationTextObserver locationInputObserver = new LocationTextObserver(originInput, destinationInput, navigateMe);
 
-        originSubject.registerObserver(locationTextObserver);
-        destinationSubject.registerObserver(locationTextObserver);
+        originSubject.registerObserver(locationInputObserver);
+        destinationSubject.registerObserver(locationInputObserver);
     }
 
     @Override
@@ -60,32 +62,22 @@ public class NavigationPrompt extends Activity {
         public void onClick(View v) {
 
             String originValue = originInput.getText().toString();
-            String destiniationValue = destinationInput.getText().toString();
+            String destinationValue = destinationInput.getText().toString();
 
             System.out.println("INPUTS: ");
             System.out.println("Origin : " + originValue);
-            System.out.println("Destination : " + destiniationValue);
+            System.out.println("Destination : " + destinationValue);
 
-            SharedPreferences localData = getPreferences(Activity.MODE_PRIVATE);
+            SharedPreferences localData = getSharedPreferences(NAV_PREFERENCES, Activity.MODE_PRIVATE);
             SharedPreferences.Editor localDataEditor = localData.edit();
 
-            localDataEditor.putString("origin", originValue);
-            localDataEditor.putString("destination", destiniationValue);
+            localDataEditor.putString(NAV_ORIGIN, originValue);
+            localDataEditor.putString(NAV_DESTINATION, destinationValue);
+            localDataEditor.commit();
 
-            DirectionRequest sendRequest = new DirectionRequest();
-            JSONObject directionJSONObject;
-
-            try {
-                directionJSONObject = sendRequest.execute(DirectionURLGenerator.generateURL(originValue, destiniationValue)).get();
-            } catch (InterruptedException e) {
-                System.out.println("ERROR : Current thread was interrupted");
-            } catch (ExecutionException e) {
-                System.out.println("ERROR: AsyncTask was unable to execute successfully.");
-            }
-
-            // TODO: Take directionJSONObject and send it off to be constructed into a map with directions from the JSONObject
-            Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
+           /* Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
             startActivity(launchMapIntent);
+            */
         }
     };
 }

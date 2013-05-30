@@ -2,6 +2,7 @@ package com.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,8 +12,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import service.DirectionRequest;
 import service.DirectionURLGenerator;
+
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -23,6 +29,11 @@ import service.DirectionURLGenerator;
  * To change this template use File | Settings | File Templates.
  */
 public class MapHandler extends Activity {
+
+    private final int LEG_POSITION = 2;
+    private final int STEP_POSITION = 1;
+    private final int START_LOCATION_POSITION = 2;
+    private final int END_LOCATION_POSITION = 3;
 
     private GoogleMap navigationMap;
 
@@ -36,8 +47,8 @@ public class MapHandler extends Activity {
     }
 
     @Override
-    protected void onPause(){
-        super.onPause();
+    protected void onStart(){
+
     }
 
     @Override
@@ -49,6 +60,43 @@ public class MapHandler extends Activity {
         navigationMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         navigationMap.setMyLocationEnabled(true);
         navigationMap.setTrafficEnabled(true);
+
+        SharedPreferences localData = getSharedPreferences(NavigationPrompt.NAV_PREFERENCES, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor localDataEditor = localData.edit();
+
+        DirectionRequest sendRequest = new DirectionRequest();
+        JSONObject directionJSONObject = null;
+
+        try {
+            directionJSONObject = sendRequest.execute(DirectionURLGenerator.
+                    generateURL(localData.getString(NavigationPrompt.NAV_ORIGIN, null), localData.getString(NavigationPrompt.NAV_DESTINATION, null))).get();
+        } catch (InterruptedException e) {
+            System.out.println("ERROR : Current thread was interrupted");
+        } catch (ExecutionException e) {
+            System.out.println("ERROR: AsyncTask was unable to execute successfully.");
+        }
+
+        drawDirectionPath(directionJSONObject);
+    }
+
+    private void drawDirectionPath(JSONObject directionJSONObject){
+
+        if (directionJSONObject == null) return;
+        if (!directionJSONObject.opt("status").equals("OK")) return;
+
+        JSONArray routes = directionJSONObject.optJSONArray("routes");
+        JSONArray legs = routes.optJSONArray(LEG_POSITION);
+        JSONArray steps = legs.optJSONArray(STEP_POSITION);
+
+        JSONObject stepStartLocation = steps.optJSONObject(START_LOCATION_POSITION);
+        JSONObject stepEndLocation = steps.optJSONObject(END_LOCATION_POSITION);
+
+        // TODO: Finish parsing through the JSON Array's and Objects to obtain necessary information to draw the route on the map.
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
     }
 
     private LocationListener currentLocationListener = new LocationListener() {

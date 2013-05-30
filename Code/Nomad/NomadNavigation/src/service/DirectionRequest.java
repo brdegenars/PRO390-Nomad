@@ -64,6 +64,7 @@ public class DirectionRequest extends AsyncTask<String, String, JSONObject> {
         String currentLine;
         StringBuilder jsonBuilder = new StringBuilder();
         JSONObject returnJSON = null;
+
         try {
             while ((currentLine = bufferedReader.readLine()) != null){
                 System.out.println(currentLine);
@@ -76,6 +77,7 @@ public class DirectionRequest extends AsyncTask<String, String, JSONObject> {
         } catch (JSONException e){
             System.out.println("Error constructing JSON object");
         }
+
         return returnJSON;
     }
 }
