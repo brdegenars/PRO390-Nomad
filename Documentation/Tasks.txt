@@ -73,13 +73,13 @@ DONE 	Display application icon on hot pad
 DONE 	Application launches upon being selected after being bound to hot pad
 DONE	Takes in route origin from user in nav utility
 DONE	" destination "
-TODO	Displays a map with the aformentioned route
+DONE	Displays a map with the aformentioned route
 
 WEEK 7
 
 TODO	Consume Traffic data from a 3rd party source
 DONE	Display traffic data on a map (if possible)
 			- Display data in some visual way
-TODO	Use previous consumtion method for extracting directions
+DONE	Use previous consumtion method for extracting directions
 TODO	Alter a given route
 TODO	Display altered route

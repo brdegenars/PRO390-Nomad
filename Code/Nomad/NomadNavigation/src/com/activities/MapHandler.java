@@ -19,6 +19,8 @@ import org.json.JSONObject;
 import service.DirectionRequest;
 import service.DirectionURLGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
@@ -33,10 +35,6 @@ public class MapHandler extends Activity {
 
     private final int FIRST_ROUTE_POSITION = 0;
     private final int FIRST_LEG_POSITION = 0;
-    private final int LEG_POSITION = 3;
-    private final int STEP_POSITION = 7;
-    private final int START_LOCATION_POSITION = 5;
-    private final int END_LOCATION_POSITION = 2;
 
     private GoogleMap navigationMap;
 
@@ -97,6 +95,7 @@ public class MapHandler extends Activity {
 
         PolylineOptions routeLineOptions = new PolylineOptions();
         LatLng originLatLng = null;
+        List<LatLng> points = new ArrayList<LatLng>();
         for (int i = 0; i < steps.length(); i++){
             System.out.println("Start location for step " + i + ": " + steps.optJSONObject(i).opt("start_location"));
             System.out.println("End location for step " + i + ": " + steps.optJSONObject(i).opt("end_location"));
@@ -104,15 +103,20 @@ public class MapHandler extends Activity {
             JSONObject startLocation = (JSONObject)steps.optJSONObject(i).opt("start_location");
             JSONObject endLocation = (JSONObject)steps.optJSONObject(i).opt("end_location");
 
+            LatLng start = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
+            LatLng end = new LatLng((Double)endLocation.opt("lat"), (Double)endLocation.opt("lng"));
+
             if (i == 0) originLatLng = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
 
-            routeLineOptions.add(new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng")));
-            routeLineOptions.add(new LatLng((Double)endLocation.opt("lat"), (Double)endLocation.opt("lng")));
-        }
-        navigationMap.addPolyline(routeLineOptions);
-        animateToHere(originLatLng);
-        // TODO: Finish parsing through the JSON Array's and Objects to obtain necessary information to draw the route on the map.
 
+            routeLineOptions.add(start);
+            routeLineOptions.add(end);
+
+            points.add(start);
+            points.add(end);
+        }
+        navigationMap.addPolyline(routeLineOptions).setPoints(points);
+        animateToHere(originLatLng);
     }
 
     @Override
