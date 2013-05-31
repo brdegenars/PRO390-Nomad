@@ -49,20 +49,26 @@ public class NavigationPrompt extends Activity {
 
     @Override
     public void onResume(){
-
+        super.onResume();
     }
 
     @Override
     public void onPause(){
-
+        super.onPause();
     }
 
     private View.OnClickListener navigateMeOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-            String originValue = originInput.getText().toString();
-            String destinationValue = destinationInput.getText().toString();
+            //String originValue = originInput.getText().toString();
+            //String destinationValue = destinationInput.getText().toString();
+
+            String originValue = "884 Rocky Mouth Lane Draper, UT 84020";
+            String destinationValue = "531 East 2700 South";
+
+            originValue = originValue.replace(' ', '+');
+            destinationValue = destinationValue.replace(' ', '+');
 
             System.out.println("INPUTS: ");
             System.out.println("Origin : " + originValue);
@@ -75,9 +81,9 @@ public class NavigationPrompt extends Activity {
             localDataEditor.putString(NAV_DESTINATION, destinationValue);
             localDataEditor.commit();
 
-           /* Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
+            Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
             startActivity(launchMapIntent);
-            */
+
         }
     };
 }

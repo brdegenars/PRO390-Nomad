@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,10 +31,12 @@ import java.util.concurrent.ExecutionException;
  */
 public class MapHandler extends Activity {
 
-    private final int LEG_POSITION = 2;
-    private final int STEP_POSITION = 1;
-    private final int START_LOCATION_POSITION = 2;
-    private final int END_LOCATION_POSITION = 3;
+    private final int FIRST_ROUTE_POSITION = 0;
+    private final int FIRST_LEG_POSITION = 0;
+    private final int LEG_POSITION = 3;
+    private final int STEP_POSITION = 7;
+    private final int START_LOCATION_POSITION = 5;
+    private final int END_LOCATION_POSITION = 2;
 
     private GoogleMap navigationMap;
 
@@ -48,7 +51,7 @@ public class MapHandler extends Activity {
 
     @Override
     protected void onStart(){
-
+        super.onStart();
     }
 
     @Override
@@ -85,13 +88,31 @@ public class MapHandler extends Activity {
         if (!directionJSONObject.opt("status").equals("OK")) return;
 
         JSONArray routes = directionJSONObject.optJSONArray("routes");
-        JSONArray legs = routes.optJSONArray(LEG_POSITION);
-        JSONArray steps = legs.optJSONArray(STEP_POSITION);
+        JSONObject firstRoute = routes.optJSONObject(FIRST_ROUTE_POSITION);
 
-        JSONObject stepStartLocation = steps.optJSONObject(START_LOCATION_POSITION);
-        JSONObject stepEndLocation = steps.optJSONObject(END_LOCATION_POSITION);
+        JSONArray legs = firstRoute.optJSONArray("legs");
+        JSONObject firstLeg = legs.optJSONObject(FIRST_LEG_POSITION);
 
+        JSONArray steps = firstLeg.optJSONArray("steps");
+
+        PolylineOptions routeLineOptions = new PolylineOptions();
+        LatLng originLatLng = null;
+        for (int i = 0; i < steps.length(); i++){
+            System.out.println("Start location for step " + i + ": " + steps.optJSONObject(i).opt("start_location"));
+            System.out.println("End location for step " + i + ": " + steps.optJSONObject(i).opt("end_location"));
+
+            JSONObject startLocation = (JSONObject)steps.optJSONObject(i).opt("start_location");
+            JSONObject endLocation = (JSONObject)steps.optJSONObject(i).opt("end_location");
+
+            if (i == 0) originLatLng = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
+
+            routeLineOptions.add(new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng")));
+            routeLineOptions.add(new LatLng((Double)endLocation.opt("lat"), (Double)endLocation.opt("lng")));
+        }
+        navigationMap.addPolyline(routeLineOptions);
+        animateToHere(originLatLng);
         // TODO: Finish parsing through the JSON Array's and Objects to obtain necessary information to draw the route on the map.
+
     }
 
     @Override
@@ -99,12 +120,14 @@ public class MapHandler extends Activity {
         super.onPause();
     }
 
+    private void animateToHere(LatLng location){
+         navigationMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+    }
+
     private LocationListener currentLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15);
-            //navigationMap.moveCamera(update);
-            navigationMap.animateCamera(update);
+            //animateToHere(new LatLng(location.getLatitude(), location.getLongitude()));
         }
 
         @Override
