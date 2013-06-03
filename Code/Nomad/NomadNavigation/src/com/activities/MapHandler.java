@@ -7,14 +7,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.maps.GeoPoint;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import service.DirectionRequest;
 import service.DirectionURLGenerator;
@@ -45,11 +44,6 @@ public class MapHandler extends Activity {
 
         LocationManager locationManager  = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, currentLocationListener);
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
     }
 
     @Override
@@ -88,40 +82,95 @@ public class MapHandler extends Activity {
         JSONArray routes = directionJSONObject.optJSONArray("routes");
         JSONObject firstRoute = routes.optJSONObject(FIRST_ROUTE_POSITION);
 
+        JSONObject smoothPolyline = firstRoute.optJSONObject("overview_polyline");
+        String polylinePoints = (String)smoothPolyline.opt("points");
+
+        System.out.println("Polyline points : \n" + polylinePoints);
+
+
         JSONArray legs = firstRoute.optJSONArray("legs");
         JSONObject firstLeg = legs.optJSONObject(FIRST_LEG_POSITION);
 
         JSONArray steps = firstLeg.optJSONArray("steps");
-
         PolylineOptions routeLineOptions = new PolylineOptions();
-        LatLng originLatLng = null;
-        List<LatLng> points = new ArrayList<LatLng>();
-        for (int i = 0; i < steps.length(); i++){
-            System.out.println("Start location for step " + i + ": " + steps.optJSONObject(i).opt("start_location"));
-            System.out.println("End location for step " + i + ": " + steps.optJSONObject(i).opt("end_location"));
+        //LatLng originLatLng;
 
-            JSONObject startLocation = (JSONObject)steps.optJSONObject(i).opt("start_location");
-            JSONObject endLocation = (JSONObject)steps.optJSONObject(i).opt("end_location");
+//        for (int i = 0; i < steps.length(); i++){
+//
+//            JSONObject stepPolyline = steps.optJSONObject(3);
+//            List<LatLng> stepPolylinePoints = decodePoly(stepPolyline.optString("points"));
+//
+//            for (LatLng stepPolylinePoint : stepPolylinePoints){
+//                //LatLng geoPointLatLng = new LatLng((double)stepPolylinePoint.getLatitudeE6(), (double)stepPolylinePoint.getLongitudeE6());
+//                routeLineOptions.add(stepPolylinePoint);
+//            }
+//        }
 
-            LatLng start = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
-            LatLng end = new LatLng((Double)endLocation.opt("lat"), (Double)endLocation.opt("lng"));
+//        for (int i = 0; i < steps.length(); i++){
+//            System.out.println("Start location for step " + i + ": " + steps.optJSONObject(i).opt("start_location"));
+//            System.out.println("End location for step " + i + ": " + steps.optJSONObject(i).opt("end_location"));
+//
+//            JSONObject startLocation = (JSONObject)steps.optJSONObject(i).opt("start_location");
+//            JSONObject endLocation = (JSONObject)steps.optJSONObject(i).opt("end_location");
+//
+//            LatLng start = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
+//            LatLng end = new LatLng((Double)endLocation.opt("lat"), (Double)endLocation.opt("lng"));
+//
+//            if (i == 0) originLatLng = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
+//
+//
+//            routeLineOptions.add(start);
+//            routeLineOptions.add(end);
+//
+//            points.add(start);
+//            points.add(end);
+//        }
 
-            if (i == 0) originLatLng = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
+        List<LatLng> polylingLatLng = decodePoly(polylinePoints);
 
+        for (LatLng polylineLatLngPoint : polylingLatLng)
+            routeLineOptions.add(polylineLatLngPoint);
 
-            routeLineOptions.add(start);
-            routeLineOptions.add(end);
-
-            points.add(start);
-            points.add(end);
-        }
-        navigationMap.addPolyline(routeLineOptions).setPoints(points);
-        animateToHere(originLatLng);
+        navigationMap.addPolyline(routeLineOptions);
+        //animateToHere(originLatLng);
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
+    /**
+     * Method to decode polyline points
+     * Courtesy : jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
+     * */
+    private List<LatLng> decodePoly(String encoded) {
+
+        List<LatLng> poly = new ArrayList<LatLng>();
+        int index = 0, len = encoded.length();
+        int lat = 0, lng = 0;
+
+        while (index < len) {
+            int b, shift = 0, result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+
+            LatLng p = new LatLng((((double) lat / 1E5)),
+                    (((double) lng / 1E5)));
+            poly.add(p);
+        }
+
+        return poly;
     }
 
     private void animateToHere(LatLng location){

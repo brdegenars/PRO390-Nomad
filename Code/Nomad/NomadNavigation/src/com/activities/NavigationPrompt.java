@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +16,8 @@ import service.DirectionRequest;
 import service.DirectionURLGenerator;
 import subject.LocationTextSubject;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class NavigationPrompt extends Activity {
@@ -27,7 +26,7 @@ public class NavigationPrompt extends Activity {
     public static final String NAV_ORIGIN = "origin";
     public static final String NAV_DESTINATION = "destination";
 
-    public String currentLat, currentLong;
+    public String currentLat, currentLong, currentAddress;
 
     private EditText originInput, destinationInput;
 
@@ -89,12 +88,22 @@ public class NavigationPrompt extends Activity {
     };
 
     private LocationListener currentLocationListener = new LocationListener() {
+
+        //Geocoder geocoder = new Geocoder(getBaseContext());
         @Override
         public void onLocationChanged(Location location) {
             currentLat = String.valueOf(location.getLatitude());
             currentLong = String.valueOf(location.getLongitude());
 
             // TODO: Display address instead of lat and long
+            /*List<Address> currentAddresses = null;
+            try{
+            currentAddresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            } catch (IOException e){
+                System.out.println("ERROR : Bad location");
+            }
+
+            currentAddress = currentAddresses.get(0).getAddressLine(0).toString(); */
         }
 
         @Override
@@ -111,11 +120,11 @@ public class NavigationPrompt extends Activity {
         @Override
         public void onClick(View v) {
 
-            String originValue = originInput.getText().toString();
-            String destinationValue = destinationInput.getText().toString();
+            //String originValue = originInput.getText().toString();
+            //String destinationValue = destinationInput.getText().toString();
 
-            //String originValue = "884 Rocky Mouth Lane Draper, UT 84020";
-            //String destinationValue = "531 East 2700 South";
+            String originValue = "884 Rocky Mouth Lane Draper, UT 84020";
+            String destinationValue = "531 East 2700 South";
 
             originValue = originValue.replace(' ', '+');
             destinationValue = destinationValue.replace(' ', '+');
