@@ -11,14 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import observer.LocationTextObserver;
-import org.json.JSONObject;
-import service.DirectionRequest;
-import service.DirectionURLGenerator;
 import subject.LocationTextSubject;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class NavigationPrompt extends Activity {
 

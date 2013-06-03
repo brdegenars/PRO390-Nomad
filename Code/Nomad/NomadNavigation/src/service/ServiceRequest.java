@@ -21,7 +21,7 @@ import java.io.InputStreamReader;
  * Time: 2:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public class DirectionRequest extends AsyncTask<String, String, JSONObject> {
+public class ServiceRequest extends AsyncTask<String, String, JSONObject> {
 
     private String json;
 

@@ -12,11 +12,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.maps.GeoPoint;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import service.DirectionRequest;
+import service.ServiceRequest;
 import service.DirectionURLGenerator;
+import service.TrafficURLGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,25 +59,27 @@ public class MapHandler extends Activity {
         SharedPreferences localData = getSharedPreferences(NavigationPrompt.NAV_PREFERENCES, Activity.MODE_PRIVATE);
         SharedPreferences.Editor localDataEditor = localData.edit();
 
-        DirectionRequest sendRequest = new DirectionRequest();
-        JSONObject directionJSONObject = null;
+        JSONObject directionJSONObject;
 
         try {
-            directionJSONObject = sendRequest.execute(DirectionURLGenerator.
+            directionJSONObject = new ServiceRequest().execute(DirectionURLGenerator.
                     generateURL(localData.getString(NavigationPrompt.NAV_ORIGIN, null), localData.getString(NavigationPrompt.NAV_DESTINATION, null))).get();
+
+            String[] cardinalBounds = drawDirectionPath(directionJSONObject);
+
+            new ServiceRequest().execute(TrafficURLGenerator.generateURL(cardinalBounds, new String[]{"3", "4"}, new String[]{"1", "2", "6", "7", "8", "10", "11"}));
+
         } catch (InterruptedException e) {
             System.out.println("ERROR : Current thread was interrupted");
         } catch (ExecutionException e) {
             System.out.println("ERROR: AsyncTask was unable to execute successfully.");
         }
-
-        drawDirectionPath(directionJSONObject);
     }
 
-    private void drawDirectionPath(JSONObject directionJSONObject){
+    private String[] drawDirectionPath(JSONObject directionJSONObject){
 
-        if (directionJSONObject == null) return;
-        if (!directionJSONObject.opt("status").equals("OK")) return;
+        if (directionJSONObject == null) return null;
+        if (!directionJSONObject.opt("status").equals("OK")) return null;
 
         JSONArray routes = directionJSONObject.optJSONArray("routes");
         JSONObject firstRoute = routes.optJSONObject(FIRST_ROUTE_POSITION);
@@ -127,12 +129,31 @@ public class MapHandler extends Activity {
 //        }
 
         List<LatLng> polylingLatLng = decodePoly(polylinePoints);
+        LatLng firstPolylineLatLng = polylingLatLng.get(0);
 
-        for (LatLng polylineLatLngPoint : polylingLatLng)
+        double NLat = firstPolylineLatLng.latitude,
+               SLat = firstPolylineLatLng.latitude,
+               ELng = firstPolylineLatLng.longitude,
+               WLng = firstPolylineLatLng.longitude;
+
+        for (LatLng polylineLatLngPoint : polylingLatLng){
+
+            double currentLng = polylineLatLngPoint.longitude;
+            double currentLat = polylineLatLngPoint.latitude;
+
+            if (currentLat < SLat) SLat = currentLat;
+            else if (currentLat > NLat) NLat = currentLat;
+
+            if (currentLng < ELng) ELng = currentLng;
+            else if (currentLng > WLng) WLng = currentLng;
+
             routeLineOptions.add(polylineLatLngPoint);
+        }
 
         navigationMap.addPolyline(routeLineOptions);
         //animateToHere(originLatLng);
+
+        return new String[] {String.valueOf(SLat), String.valueOf(WLng), String.valueOf(NLat), String.valueOf(ELng)};
     }
 
     /**
