@@ -17,7 +17,7 @@ public class TrafficURLGenerator {
                              SOUTH = 1,
                              EAST = 2,
                              WEST = 3;
-    private static final String API_KEY_VALUE = "AlrXLl21c3dQrlMLorr4Ob-Y12UOaCclC1YrQ9UtXiVOG1OBz_Bj432uZuXEU8r7";
+    public static final String API_KEY_VALUE = "AlrXLl21c3dQrlMLorr4Ob-Y12UOaCclC1YrQ9UtXiVOG1OBz_Bj432uZuXEU8r7";
     private static final String INCIDENT_SEVERITY = "severity";
     private static final String INCIDENT_TYPE = "type";
     private static final String API_KEY = "key";

@@ -72,6 +72,13 @@ public class ServiceRequest extends AsyncTask<String, String, JSONObject> {
             }
             json = jsonBuilder.toString();
             returnJSON = new JSONObject(json);
+
+            bufferedReader.close();
+            inputStreamReader.close();
+            if (inputStream != null) inputStream.close();
+            httpClient.clearResponseInterceptors();
+            httpClient.clearRequestInterceptors();
+
         } catch (IOException e) {
             System.out.println("Couldn't read from bufferedReader.");
         } catch (JSONException e){

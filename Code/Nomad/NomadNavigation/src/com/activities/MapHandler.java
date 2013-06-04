@@ -35,6 +35,8 @@ public class MapHandler extends Activity {
     private final int FIRST_ROUTE_POSITION = 0;
     private final int FIRST_LEG_POSITION = 0;
 
+    private final String TEST_JSON_URL = "http://dev.virtualearth.net/REST/V1/Traffic/Incidents/37,-105,45,-94/?t=9,2&s=2,3&key=" + TrafficURLGenerator.API_KEY_VALUE;
+
     private GoogleMap navigationMap;
 
     @Override
@@ -59,7 +61,7 @@ public class MapHandler extends Activity {
         SharedPreferences localData = getSharedPreferences(NavigationPrompt.NAV_PREFERENCES, Activity.MODE_PRIVATE);
         SharedPreferences.Editor localDataEditor = localData.edit();
 
-        JSONObject directionJSONObject;
+        JSONObject directionJSONObject, trafficJSONObject;
 
         try {
             directionJSONObject = new ServiceRequest().execute(DirectionURLGenerator.
@@ -67,7 +69,8 @@ public class MapHandler extends Activity {
 
             String[] cardinalBounds = drawDirectionPath(directionJSONObject);
 
-            new ServiceRequest().execute(TrafficURLGenerator.generateURL(cardinalBounds, new String[]{"3", "4"}, new String[]{"1", "2", "6", "7", "8", "10", "11"}));
+            //new ServiceRequest().execute(TrafficURLGenerator.generateURL(cardinalBounds, new String[]{"3", "4"}, new String[]{"1", "2", "6", "7", "8", "10", "11"}));
+            trafficJSONObject = new ServiceRequest().execute(TEST_JSON_URL).get();
 
         } catch (InterruptedException e) {
             System.out.println("ERROR : Current thread was interrupted");
@@ -95,38 +98,6 @@ public class MapHandler extends Activity {
 
         JSONArray steps = firstLeg.optJSONArray("steps");
         PolylineOptions routeLineOptions = new PolylineOptions();
-        //LatLng originLatLng;
-
-//        for (int i = 0; i < steps.length(); i++){
-//
-//            JSONObject stepPolyline = steps.optJSONObject(3);
-//            List<LatLng> stepPolylinePoints = decodePoly(stepPolyline.optString("points"));
-//
-//            for (LatLng stepPolylinePoint : stepPolylinePoints){
-//                //LatLng geoPointLatLng = new LatLng((double)stepPolylinePoint.getLatitudeE6(), (double)stepPolylinePoint.getLongitudeE6());
-//                routeLineOptions.add(stepPolylinePoint);
-//            }
-//        }
-
-//        for (int i = 0; i < steps.length(); i++){
-//            System.out.println("Start location for step " + i + ": " + steps.optJSONObject(i).opt("start_location"));
-//            System.out.println("End location for step " + i + ": " + steps.optJSONObject(i).opt("end_location"));
-//
-//            JSONObject startLocation = (JSONObject)steps.optJSONObject(i).opt("start_location");
-//            JSONObject endLocation = (JSONObject)steps.optJSONObject(i).opt("end_location");
-//
-//            LatLng start = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
-//            LatLng end = new LatLng((Double)endLocation.opt("lat"), (Double)endLocation.opt("lng"));
-//
-//            if (i == 0) originLatLng = new LatLng((Double)startLocation.opt("lat"), (Double)startLocation.opt("lng"));
-//
-//
-//            routeLineOptions.add(start);
-//            routeLineOptions.add(end);
-//
-//            points.add(start);
-//            points.add(end);
-//        }
 
         List<LatLng> polylingLatLng = decodePoly(polylinePoints);
         LatLng firstPolylineLatLng = polylingLatLng.get(0);
