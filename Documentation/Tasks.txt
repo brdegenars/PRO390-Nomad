@@ -77,9 +77,27 @@ DONE	Displays a map with the aformentioned route
 
 WEEK 7
 
-TODO	Consume Traffic data from a 3rd party source
+DONE	Consume Traffic data from a 3rd party source
 DONE	Display traffic data on a map (if possible)
 			- Display data in some visual way
 DONE	Use previous consumtion method for extracting directions
 TODO	Alter a given route
 TODO	Display altered route
+
+WEEK 8
+
+TODO	Finish Week 7 Tasks
+TODO	Nav utility routes user away from traffic incidents 
+DONE	Draw route on map along the correct road
+DONE 	Allow the user to select his/her current location
+DONE	Request and receive JSON object from direction serivce
+DONE 	Parse JSON object from request for desired values
+	
+
+WEEK 9
+
+TODO	Finish Week 8 Tasks
+TODO	Create notification messages for undesired travel conditions
+TODO	Create reminders for events in calendar
+TODO		- If location available, make request for directions to event location
+

@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -29,11 +30,11 @@ public class ServiceRequest extends AsyncTask<String, String, JSONObject> {
     protected JSONObject doInBackground(String... params) {
 
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(params[0]);
+        HttpGet httpGet = new HttpGet(params[0]);
         HttpResponse httpResponse = null;
 
         try {
-            httpResponse = httpClient.execute(httpPost);
+            httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
             System.out.println("Couldn't execute POST");
         }
