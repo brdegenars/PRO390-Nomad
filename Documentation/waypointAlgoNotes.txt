@@ -1,0 +1,31 @@
+1. Get the location of the incident and store it
+2. Determine what direction the destination is, in relation to the origin and the incident.
+	- Need dest location and incident location (lat/lng) 
+3. Choose two semi-random lat/lng points in the direction derived from step 2, within a close proximity to eachother 
+	- Do NOT cross the threshold of the origin's lat and lang. (Don't back track)
+4. Add new points to waypoints attribute
+5. Request new route
+6. Request traffic on new route
+7. IF traffic response indicates another incident, repeat step one
+   ELSE draw new route and display 
+   
+   
+   
+1. Make request for new route
+2. IF the point of the incident i still in the new route, move randomized points out further
+   ELSE Step 4
+3. Step 1
+4. Get directions from origin to new waypoint
+5. Get directions from new waypoint to destination 
+6. Request traffic on new route
+7. IF new route has an incident, Step 1
+   ELSE draw new polyline
+   
+   
+ NOTES:
+ 
+ - Whichever side of the origin's lng the destination is on, is the direction the waypoints should be chosen in
+ - The waypoint's lng should be +/- the incidents lng, and its lat should be +/- from the incident in the direction of the destination
+ - Use the bounding box from traffic bounds to determine the outside threshold of the waypoints selected 
+ - Waypoints always away from the incident, but still in the direction of the destination 
+ 

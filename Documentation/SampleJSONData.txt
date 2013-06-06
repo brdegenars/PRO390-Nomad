@@ -1,0 +1,59 @@
+{
+   "authenticationResultCode":"ValidCredentials",
+   "brandLogoUri":"http:\/\/dev.virtualearth.net\/Branding\/logo_powered_by.png",
+   "copyright":"Copyright © 2011 Microsoft and its suppliers. All rights reserved. This API cannot be accessed and the content and any results may not be used, reproduced or transmitted in any manner without express written permission from Microsoft Corporation.",
+   "resourceSets":[
+      {
+         "estimatedTotal":131,
+         "resources":[
+            {
+               "__type":"TrafficIncident:http:\/\/schemas.microsoft.com\/search\/local\/ws\/rest\/v1",
+               "point":{
+                  "type":"Point",
+                  "coordinates":[
+                     lat of incident,
+                     lng of incident
+                  ]
+               },
+               "congestion":"",
+               "description":"",
+               "detour":"",
+               "end":"\/Date(1310396400000)\/",
+               "incidentId":210546697,
+               "lane":"",
+               "lastModified":"\/Date(1309391096593)\/",
+               "roadClosed":true,
+               "severity":3,
+               "start":"\/Date(1307365200000)\/",
+               "type":9,
+               "verified":true
+            },
+            {
+               "__type":"TrafficIncident:http:\/\/schemas.microsoft.com\/search\/local\/ws\/rest\/v1",
+               "point":{
+                  "type":"Point",
+                  "coordinates":[
+                     38.85872,
+                     -94.54638
+                  ]
+               },
+               "congestion":"",
+               "description":"Botts Rd is closed between Andrews Rd and 142nd St - construction",
+               "detour":"To go north take US-71 NB to 140th St and go west on 140th St to access Botts Rd- To go south continue west on MO-150 to Thunderbird Rd to 149th St",
+               "end":"\/Date(1315244760000)\/",
+               "incidentId":191097424,
+               "lane":"",
+               "lastModified":"\/Date(1309391096593)\/",
+               "roadClosed":true,
+               "severity":1,
+               "start":"\/Date(1295704800000)\/",
+               "type":9,
+               "verified":true
+            }
+         ]
+      }
+   ],
+   "statusCode":200,
+   "statusDescription":"OK",
+   "traceId":"38491198bf6a42f5b7e60c18aa08ec02"
+}
