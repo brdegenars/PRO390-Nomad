@@ -15,12 +15,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import service.ServiceRequest;
 import service.DirectionURLGenerator;
+import service.ServiceRequest;
 import service.TrafficURLGenerator;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -34,7 +34,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class MapHandler extends Activity {
 
-    private final int RESOURCE_SET_POSITION = 2;
+    private final int RESOURCE_SET_POSITION = 0;
 
     private final String TEST_JSON_URL = "http://dev.virtualearth.net/REST/V1/Traffic/Incidents/37,-105,45,-94/?t=9,2&s=2,3&key=" + TrafficURLGenerator.API_KEY_VALUE;
 
@@ -76,8 +76,8 @@ public class MapHandler extends Activity {
 
                 String[] cardinalBounds = drawDirectionPath(directionJSONObject);
 
-                trafficJSONObject = new ServiceRequest().execute(TrafficURLGenerator.generateURL(cardinalBounds, new String[]{"3", "4"}, new String[]{"1", "2", "6", "7", "8", "10", "11"})).get();
-                //trafficJSONObject = new ServiceRequest().execute(TEST_JSON_URL).get();
+                //trafficJSONObject = new ServiceRequest().execute(TrafficURLGenerator.generateURL(cardinalBounds, new String[]{"3", "4"}, new String[]{"1", "2", "6", "7", "8", "10", "11"})).get();
+                trafficJSONObject = testTrafficData();
 
                 List<JSONObject> incidents = checkForIncidents(trafficJSONObject);
                 if (incidents != null){
@@ -93,6 +93,48 @@ public class MapHandler extends Activity {
                 System.out.println("ERROR: Invalid traffic JSON object");
             }
         } while (waypoint != null);
+    }
+
+    private JSONObject testTrafficData() throws JSONException {
+
+        String testJSON = "{\n" +
+                "   \"authenticationResultCode\":\"ValidCredentials\",\n" +
+                "   \"brandLogoUri\":\"http:\\/\\/dev.virtualearth.net\\/Branding\\/logo_powered_by.png\",\n" +
+                "   \"copyright\":\"Copyright © 2011 Microsoft and its suppliers. All rights reserved. This API cannot be accessed and the content and any results may not be used, reproduced or transmitted in any manner without express written permission from Microsoft Corporation.\",\n" +
+                "   \"resourceSets\":[\n" +
+                "      {\n" +
+                "         \"estimatedTotal\":131,\n" +
+                "         \"resources\":[\n" +
+                "            {\n" +
+                "               \"__type\":\"TrafficIncident:http:\\/\\/schemas.microsoft.com\\/search\\/local\\/ws\\/rest\\/v1\",\n" +
+                "               \"point\":{\n" +
+                "                  \"type\":\"Point\",\n" +
+                "                  \"coordinates\":[\n" +
+                "                     40.630663,\n" +
+                "                     -111.903827\n" +
+                "                  ]\n" +
+                "               },\n" +
+                "               \"congestion\":\"\",\n" +
+                "               \"description\":\"\",\n" +
+                "               \"detour\":\"\",\n" +
+                "               \"end\":\"\\/Date(1310396400000)\\/\",\n" +
+                "               \"incidentId\":210546697,\n" +
+                "               \"lane\":\"\",\n" +
+                "               \"lastModified\":\"\\/Date(1309391096593)\\/\",\n" +
+                "               \"roadClosed\":true,\n" +
+                "               \"severity\":3,\n" +
+                "               \"start\":\"\\/Date(1307365200000)\\/\",\n" +
+                "               \"type\":1,\n" +
+                "               \"verified\":true\n" +
+                "            }\n" +
+                "         ]\n" +
+                "      }\n" +
+                "   ],\n" +
+                "   \"statusCode\":200,\n" +
+                "   \"statusDescription\":\"OK\",\n" +
+                "   \"traceId\":\"38491198bf6a42f5b7e60c18aa08ec02\"\n" +
+                "}";
+        return new JSONObject(testJSON);
     }
 
     private String[] drawDirectionPath(JSONObject directionJSONObject){
@@ -187,21 +229,21 @@ public class MapHandler extends Activity {
         return poly;
     }
 
+    @SuppressWarnings("unchecked")
     private List<JSONObject> checkForIncidents(JSONObject trafficJSONObjcet) throws JSONException {
 
         List<JSONObject> incidentList = new ArrayList<JSONObject>();
 
         JSONArray resourceSets = trafficJSONObjcet.optJSONArray("resourceSets");
-        JSONArray resourceSet = resourceSets.optJSONArray(RESOURCE_SET_POSITION);
+        JSONObject resourceSet = resourceSets.optJSONObject(RESOURCE_SET_POSITION);
+        JSONArray incidents = resourceSet.optJSONArray("resources");
+        JSONObject incident = incidents.optJSONObject(0);
+        incidentList.add(incident);
 
-        for (int i = 0; i < resourceSet.length(); i++){
-            JSONObject incident = resourceSet.optJSONObject(i);
-            incidentList.add(incident);
-        }
         return incidentList;
     }
 
-    private int[] findIncidentAlongRoute(List<JSONObject> incidents){
+    private int[] findIncidentAlongRoute(List<JSONObject> incidents) throws JSONException {
 
         int closestStartIndex = currentRoute.size();
         int closestEndIndex = -1;
@@ -211,13 +253,13 @@ public class MapHandler extends Activity {
             JSONObject startPoint = incident.optJSONObject("point");
             JSONObject endPoint = incident.optJSONObject("toPoint");
 
-            String startPointCoordinates = startPoint.optString("coordinates");
-            String endPointCoordinates = "";
-            if (endPoint != null ) endPointCoordinates = endPoint.optString("coordinates");
+            JSONArray startPointCoordinates = startPoint.optJSONArray("coordinates");
+            JSONArray endPointCoordinates = null;
+            if (endPoint != null ) endPointCoordinates = endPoint.optJSONArray("coordinates");
 
             LatLng incidentStartPoint = extractCoordinates(startPointCoordinates);
             LatLng incidentEndPoint = null;
-            if (!endPointCoordinates.equals("")) incidentEndPoint = extractCoordinates(endPointCoordinates);
+            if (endPointCoordinates != null) incidentEndPoint = extractCoordinates(endPointCoordinates);
 
             if (currentRoute.contains(incidentStartPoint))
                 for (int j = 0; j < currentRoute.size(); j++)
@@ -233,13 +275,14 @@ public class MapHandler extends Activity {
         return new int[] {closestStartIndex, closestEndIndex};
     }
 
-    private LatLng extractCoordinates(String coordinates){
-        int LAT = 0, LNG = 1;
+    private LatLng extractCoordinates(JSONArray coordinates) throws JSONException {
+        int LAT_POSITION = 0, LNG_POSITION = 1;
 
-        String[] coordinateLiterals = coordinates.split(",");
-        for(String coordinate : coordinateLiterals) coordinate.trim();
+        double lat, lng;
+        lat = coordinates.getDouble(LAT_POSITION);
+        lng = coordinates.getDouble(LNG_POSITION);
 
-        return new LatLng(Double.valueOf(coordinateLiterals[LAT]), Double.valueOf(coordinateLiterals[LNG]));
+        return new LatLng(lat, lng);
     }
 
     private LatLng selectDivertingWaypoint(int[] incidentPointIndices){
