@@ -81,12 +81,12 @@ DONE	Consume Traffic data from a 3rd party source
 DONE	Display traffic data on a map (if possible)
 			- Display data in some visual way
 DONE	Use previous consumtion method for extracting directions
-TODO	Alter a given route
-TODO	Display altered route
+DONE	Alter a given route
+DONE	Display altered route
 
 WEEK 8
 
-TODO	Finish Week 7 Tasks
+DONE	Finish Week 7 Tasks
 TODO	Nav utility routes user away from traffic incidents 
 DONE	Draw route on map along the correct road
 DONE 	Allow the user to select his/her current location
