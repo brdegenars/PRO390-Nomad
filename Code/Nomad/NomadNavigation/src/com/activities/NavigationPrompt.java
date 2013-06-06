@@ -112,30 +112,31 @@ public class NavigationPrompt extends Activity {
     private View.OnClickListener navigateMeOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+        //String originValue = originInput.getText().toString();
+        //String destinationValue = destinationInput.getText().toString();
 
-            //String originValue = originInput.getText().toString();
-            //String destinationValue = destinationInput.getText().toString();
+        String originValue = "10701 S. RiverFront Parkway South Jordan, Utah 84095";
+        String destinationValue = "143 S Main St Salt Lake City, UT 84111";
 
-            String originValue = "884 Rocky Mouth Lane Draper, UT 84020";
-            String destinationValue = "531 East 2700 South";
+//        String originValue = "40.558450, -111.910162";
+//        String destinationValue = "40.558857, -111.909358";
 
-            originValue = originValue.replace(' ', '+');
-            destinationValue = destinationValue.replace(' ', '+');
+        originValue = originValue.replace(' ', '+');
+        destinationValue = destinationValue.replace(' ', '+');
 
-            System.out.println("INPUTS: ");
-            System.out.println("Origin : " + originValue);
-            System.out.println("Destination : " + destinationValue);
+        System.out.println("INPUTS: ");
+        System.out.println("Origin : " + originValue);
+        System.out.println("Destination : " + destinationValue);
 
-            SharedPreferences localData = getSharedPreferences(NAV_PREFERENCES, Activity.MODE_PRIVATE);
-            SharedPreferences.Editor localDataEditor = localData.edit();
+        SharedPreferences localData = getSharedPreferences(NAV_PREFERENCES, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor localDataEditor = localData.edit();
 
-            localDataEditor.putString(NAV_ORIGIN, originValue);
-            localDataEditor.putString(NAV_DESTINATION, destinationValue);
-            localDataEditor.commit();
+        localDataEditor.putString(NAV_ORIGIN, originValue);
+        localDataEditor.putString(NAV_DESTINATION, destinationValue);
+        localDataEditor.commit();
 
-            Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
-            startActivity(launchMapIntent);
-
+        Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
+        startActivity(launchMapIntent);
         }
     };
 }

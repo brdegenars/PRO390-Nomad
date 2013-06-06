@@ -1,5 +1,11 @@
 package service;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -17,8 +23,9 @@ public class DirectionURLGenerator {
     private static final String AVOID_TOLLS = "tolls";
     private static final String UNIT_METRIC = "metric";
     private static final String UNIT_IMPERIAL = "imperial";
+    private static final String URL_ENCODING = "UTF-8";
 
-    public static String generateURL(String origin, String destination){
+    public static String generateURL(String origin, String destination, LatLng waypoint){
 
         String url = "http://maps.googleapis.com/maps/api/directions/json?";
 
@@ -26,23 +33,21 @@ public class DirectionURLGenerator {
         url = extractParameter(url, "destination", new String[]{destination}, false);
         url = extractParameter(url, "sensor", new String[]{String.valueOf(SENSOR_OFF)}, false);
         url = extractParameter(url, "mode", new String[]{TRANSIT_MODE}, false);
-        //url = extractParameter(url, "waypoints", params.get(4), false);
+        if (waypoint != null) url = extractParameter(url, "waypoints", new String[]{waypoint.latitude + "," + waypoint.longitude}, false);
         //url = extractParameter(url, "avoid", null, false);
         url = extractParameter(url, "units", new String[]{UNIT_IMPERIAL}, true);
+        //url.replace(".", "%2E");
 
         return url;
     }
 
     private static String extractParameter(String url, String parameter, String[] params, boolean lastParam){
 
-        if(parameter.equals("way-points") && params.length > 1){
+        if(parameter.equals("waypoints") && params.length > 1){
 
-            url = url.concat(parameter + "=" + params[0] + "|");
+            url = url.concat(parameter + "=via:" + params[0]);
+            for(int i = 1; i < params.length; i++) url = url.concat("%7Cvia:" + params[i]);
 
-            for(int i = 1; i < params.length - 1; i++)
-                url = url.concat(params[i] + "|");
-
-            url = url.concat(params[params.length-1] + "&");
         } else
             url = url.concat(parameter + "=" + params[0]);
 
