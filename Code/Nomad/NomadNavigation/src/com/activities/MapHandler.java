@@ -3,6 +3,7 @@ package com.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -105,7 +106,7 @@ public class MapHandler extends Activity {
                 System.out.println("ERROR: Invalid traffic JSON object");
             }
 //        } while (!incidents.isEmpty());
-        navigationMap.addPolyline(routeLineOptions);
+        navigationMap.addPolyline(routeLineOptions.color(Color.BLUE));
     }
 
     private JSONObject getDirectionJsonObject(String originLocation, String destinationLocation, LatLng waypoint) throws InterruptedException, ExecutionException {
@@ -219,6 +220,7 @@ public class MapHandler extends Activity {
                 routeLineOptions.add(polylineLatLngPoint);
             else System.out.println("DUPLICATE POINT: " + polylineLatLngPoint.latitude + ", " + polylineLatLngPoint.longitude);
         }
+        navigationMap.addPolyline(routeLineOptions.color(Color.RED));
         //animateToHere(originLatLng);
 
         return new String[] {String.valueOf(SLat), String.valueOf(WLng), String.valueOf(NLat), String.valueOf(ELng)};
@@ -323,7 +325,7 @@ public class MapHandler extends Activity {
 
     private LatLng selectDivertingWaypoint(int[] incidentPointIndices){
 
-        double TEN_PERCENT = .1;
+        double FIFTEEN_PERCENT = .15;
 
         LatLng destination = currentRoute.get(currentRoute.size() - 1);
         LatLng incidentStart = currentRoute.get(incidentPointIndices[0]);
@@ -344,17 +346,17 @@ public class MapHandler extends Activity {
         double latDifference = Math.abs(destination.latitude - incidentStart.latitude);
 
         if (direction.equals("NW")){
-            newLat = (incidentStart.latitude - (latDifference * TEN_PERCENT));
-            newLng = (incidentStart.longitude - (lngDifference * TEN_PERCENT));
+            newLat = (incidentStart.latitude - (latDifference * FIFTEEN_PERCENT));
+            newLng = (incidentStart.longitude - (lngDifference * FIFTEEN_PERCENT));
         } else if (direction.equals("NE")){
-            newLat = (incidentStart.latitude - (latDifference * TEN_PERCENT));
-            newLng = (incidentStart.longitude + (lngDifference * TEN_PERCENT));
+            newLat = (incidentStart.latitude - (latDifference * FIFTEEN_PERCENT));
+            newLng = (incidentStart.longitude + (lngDifference * FIFTEEN_PERCENT));
         } else if (direction.equals("SW")){
-            newLat = (incidentStart.latitude + (latDifference * TEN_PERCENT));
-            newLng = (incidentStart.longitude + (lngDifference * TEN_PERCENT));
+            newLat = (incidentStart.latitude + (latDifference * FIFTEEN_PERCENT));
+            newLng = (incidentStart.longitude + (lngDifference * FIFTEEN_PERCENT));
         } else if (direction.equals("SE")){
-            newLat = (incidentStart.latitude + (latDifference * TEN_PERCENT));
-            newLng = (incidentStart.longitude - (lngDifference * TEN_PERCENT));
+            newLat = (incidentStart.latitude + (latDifference * FIFTEEN_PERCENT));
+            newLng = (incidentStart.longitude - (lngDifference * FIFTEEN_PERCENT));
         }
         return new LatLng(newLat, newLng);
     }
