@@ -116,7 +116,7 @@ public class NavigationPrompt extends Activity {
         //String destinationValue = destinationInput.getText().toString();
 
         String originValue = "10701 S. RiverFront Parkway South Jordan, Utah 84095";
-        String destinationValue = "143 S Main St Salt Lake City, UT 84111";
+        String destinationValue = "E 5290 S Salt Lake City, UT 84111";
 
 //        String originValue = "40.558450, -111.910162";
 //        String destinationValue = "40.558857, -111.909358";

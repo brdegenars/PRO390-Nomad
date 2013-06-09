@@ -34,12 +34,20 @@ import java.util.concurrent.ExecutionException;
  */
 public class MapHandler extends Activity {
 
-    private final int RESOURCE_SET_POSITION = 0;
-
     private final String TEST_JSON_URL = "http://dev.virtualearth.net/REST/V1/Traffic/Incidents/37,-105,45,-94/?t=9,2&s=2,3&key=" + TrafficURLGenerator.API_KEY_VALUE;
 
     private GoogleMap navigationMap;
-    private List<LatLng> currentRoute = new ArrayList<LatLng>();
+    private PolylineOptions routeLineOptions;
+    private List<LatLng> currentRoute = new ArrayList<LatLng>(){
+        @Override
+        public boolean contains(Object loc){
+            LatLng location = (LatLng)loc;
+            for(LatLng point : this){
+                if (Math.abs(point.latitude - location.latitude) < 0.01 && (point.longitude - location.longitude) < 0.01) return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,41 +66,53 @@ public class MapHandler extends Activity {
 
         navigationMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         navigationMap.setMyLocationEnabled(true);
-        navigationMap.setTrafficEnabled(true);
+        //navigationMap.setTrafficEnabled(true);
 
         SharedPreferences localData = getSharedPreferences(NavigationPrompt.NAV_PREFERENCES, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor localDataEditor = localData.edit();
+        //SharedPreferences.Editor localDataEditor = localData.edit();
 
-        JSONObject directionJSONObject, trafficJSONObject = null;
+        JSONObject directionJSONObject, trafficJSONObject;
 
         String originLocation = localData.getString(NavigationPrompt.NAV_ORIGIN, null);
         String destinationLocation = localData.getString(NavigationPrompt.NAV_DESTINATION, null);
         LatLng waypoint = null;
+        List<JSONObject> incidents;
 
-        do {
+//        do {
             try {
-                directionJSONObject = new ServiceRequest().
-                        execute(DirectionURLGenerator.generateURL(originLocation, destinationLocation, waypoint)).get();
+                directionJSONObject = getDirectionJsonObject(originLocation, destinationLocation, waypoint);
 
                 String[] cardinalBounds = drawDirectionPath(directionJSONObject);
 
                 //trafficJSONObject = new ServiceRequest().execute(TrafficURLGenerator.generateURL(cardinalBounds, new String[]{"3", "4"}, new String[]{"1", "2", "6", "7", "8", "10", "11"})).get();
                 trafficJSONObject = testTrafficData();
 
-                List<JSONObject> incidents = checkForIncidents(trafficJSONObject);
-                if (incidents != null){
+                incidents = checkForIncidents(trafficJSONObject);
+                if (incidents != null) {
                     int[] hinderingIncident = findIncidentAlongRoute(incidents);
-                    if (hinderingIncident[0] != currentRoute.size())
+                    if (hinderingIncident[0] != currentRoute.size()){
                         waypoint = selectDivertingWaypoint(hinderingIncident);
+                        directionJSONObject = getDirectionJsonObject(originLocation, destinationLocation, waypoint);
+
+                        cardinalBounds = drawDirectionPath(directionJSONObject);
+                    }
                 }
             } catch (InterruptedException e) {
                 System.out.println("ERROR : Current thread was interrupted");
             } catch (ExecutionException e) {
                 System.out.println("ERROR: AsyncTask was unable to execute successfully.");
-            } catch (JSONException e){
+            } catch (JSONException e) {
                 System.out.println("ERROR: Invalid traffic JSON object");
             }
-        } while (waypoint != null);
+//        } while (!incidents.isEmpty());
+        navigationMap.addPolyline(routeLineOptions);
+    }
+
+    private JSONObject getDirectionJsonObject(String originLocation, String destinationLocation, LatLng waypoint) throws InterruptedException, ExecutionException {
+        JSONObject directionJSONObject;
+        directionJSONObject = new ServiceRequest().
+                execute(DirectionURLGenerator.generateURL(originLocation, destinationLocation, waypoint)).get();
+        return directionJSONObject;
     }
 
     private JSONObject testTrafficData() throws JSONException {
@@ -110,8 +130,8 @@ public class MapHandler extends Activity {
                 "               \"point\":{\n" +
                 "                  \"type\":\"Point\",\n" +
                 "                  \"coordinates\":[\n" +
-                "                     40.630663,\n" +
-                "                     -111.903827\n" +
+                "                     40.63066,\n" +
+                "                     -111.90382\n" +
                 "                  ]\n" +
                 "               },\n" +
                 "               \"congestion\":\"\",\n" +
@@ -143,7 +163,7 @@ public class MapHandler extends Activity {
         if (!directionJSONObject.opt("status").equals("OK")) return null;
 
         int FIRST_ROUTE_POSITION = 0;
-        int FIRST_LEG_POSITION = 0;
+        //int FIRST_LEG_POSITION = 0;
 
         JSONArray routes = directionJSONObject.optJSONArray("routes");
         JSONObject firstRoute = routes.optJSONObject(FIRST_ROUTE_POSITION);
@@ -153,25 +173,39 @@ public class MapHandler extends Activity {
 
         System.out.println("Polyline points : \n" + polylinePoints);
 
-        JSONArray legs = firstRoute.optJSONArray("legs");
-        JSONObject firstLeg = legs.optJSONObject(FIRST_LEG_POSITION);
+        //JSONArray legs = firstRoute.optJSONArray("legs");
+        //JSONObject firstLeg = legs.optJSONObject(FIRST_LEG_POSITION);
 
-        JSONArray steps = firstLeg.optJSONArray("steps");
-        PolylineOptions routeLineOptions = new PolylineOptions();
+        routeLineOptions = new PolylineOptions();
 
-        List<LatLng> polylinegLatLng = decodePoly(polylinePoints);
+        List<LatLng> polylineLatLng = decodePoly(polylinePoints);
 
         currentRoute.clear();
-        for(LatLng polyline : polylinegLatLng) currentRoute.add(polyline);
 
-        LatLng firstPolylineLatLng = polylinegLatLng.get(0);
+        double maxDifLat = (polylineLatLng.get(0).latitude - polylineLatLng.get(1).latitude);
+        double maxDifLng = (polylineLatLng.get(0).longitude - polylineLatLng.get(1).longitude);
+        currentRoute.add(polylineLatLng.get(0));
+
+        for(int i = 1; i < polylineLatLng.size(); i++){
+            currentRoute.add(polylineLatLng.get(i));
+            System.out.println("Point along path: " + polylineLatLng.get(i).latitude + ", " + polylineLatLng.get(i).longitude);
+            double currentLatDif = (polylineLatLng.get(i).latitude - polylineLatLng.get(i - 1).latitude);
+            double currentLngDif = (polylineLatLng.get(i).longitude - polylineLatLng.get(i - 1).longitude);
+            if (currentLatDif > maxDifLat) maxDifLat = currentLatDif;
+            if (currentLngDif > maxDifLng) maxDifLng = currentLngDif;
+        }
+
+        System.out.println("MAX LAT DIFF BETWEEN POINTS: " + maxDifLat);
+        System.out.println("MAX LNG DIFF BETWEEN POINTS: " + maxDifLng);
+
+        LatLng firstPolylineLatLng = polylineLatLng.get(0);
 
         double NLat = firstPolylineLatLng.latitude,
                SLat = firstPolylineLatLng.latitude,
                ELng = firstPolylineLatLng.longitude,
                WLng = firstPolylineLatLng.longitude;
 
-        for (LatLng polylineLatLngPoint : polylinegLatLng){
+        for (LatLng polylineLatLngPoint : polylineLatLng){
 
             double currentLng = polylineLatLngPoint.longitude;
             double currentLat = polylineLatLngPoint.latitude;
@@ -181,11 +215,10 @@ public class MapHandler extends Activity {
 
             if (currentLng < WLng) WLng = currentLng;
             else if (currentLng > ELng) ELng = currentLng;
-
-            routeLineOptions.add(polylineLatLngPoint);
+            if (!routeLineOptions.getPoints().contains(polylineLatLngPoint))
+                routeLineOptions.add(polylineLatLngPoint);
+            else System.out.println("DUPLICATE POINT: " + polylineLatLngPoint.latitude + ", " + polylineLatLngPoint.longitude);
         }
-
-        navigationMap.addPolyline(routeLineOptions);
         //animateToHere(originLatLng);
 
         return new String[] {String.valueOf(SLat), String.valueOf(WLng), String.valueOf(NLat), String.valueOf(ELng)};
@@ -232,6 +265,8 @@ public class MapHandler extends Activity {
     @SuppressWarnings("unchecked")
     private List<JSONObject> checkForIncidents(JSONObject trafficJSONObjcet) throws JSONException {
 
+        int RESOURCE_SET_POSITION = 0;
+
         List<JSONObject> incidentList = new ArrayList<JSONObject>();
 
         JSONArray resourceSets = trafficJSONObjcet.optJSONArray("resourceSets");
@@ -263,8 +298,9 @@ public class MapHandler extends Activity {
 
             if (currentRoute.contains(incidentStartPoint))
                 for (int j = 0; j < currentRoute.size(); j++)
-                    if (currentRoute.get(j).longitude == incidentStartPoint.longitude && currentRoute.get(j).latitude == incidentStartPoint.latitude)
-                        if (j < closestStartIndex) closestStartIndex = j;
+                    if (Math.abs(currentRoute.get(j).latitude - incidentStartPoint.latitude) < 0.01 && (currentRoute.get(j).longitude - incidentStartPoint.longitude) < 0.01)
+                        if (j < closestStartIndex)
+                            closestStartIndex = j;
 
             if (endPoint != null && incidentEndPoint != null)
                 for (int j = 0; j < currentRoute.size(); j++)
@@ -287,13 +323,13 @@ public class MapHandler extends Activity {
 
     private LatLng selectDivertingWaypoint(int[] incidentPointIndices){
 
-        double FIVE_PERCENT = .2;
+        double TEN_PERCENT = .1;
 
         LatLng destination = currentRoute.get(currentRoute.size() - 1);
         LatLng incidentStart = currentRoute.get(incidentPointIndices[0]);
         LatLng incidentEnd;
 
-        if (incidentPointIndices.length > 1) incidentEnd = currentRoute.get(incidentPointIndices[1]);
+        if (incidentPointIndices[1] != -1) incidentEnd = currentRoute.get(incidentPointIndices[1]);
 
         double newLat = 0.0, newLng = 0.0;
         String direction = "";
@@ -308,17 +344,17 @@ public class MapHandler extends Activity {
         double latDifference = Math.abs(destination.latitude - incidentStart.latitude);
 
         if (direction.equals("NW")){
-            newLat = (incidentStart.latitude - (latDifference * FIVE_PERCENT));
-            newLng = (incidentStart.longitude + (lngDifference * FIVE_PERCENT));
+            newLat = (incidentStart.latitude - (latDifference * TEN_PERCENT));
+            newLng = (incidentStart.longitude - (lngDifference * TEN_PERCENT));
         } else if (direction.equals("NE")){
-            newLat = (incidentStart.latitude + (latDifference * FIVE_PERCENT));
-            newLng = (incidentStart.longitude + (lngDifference * FIVE_PERCENT));
+            newLat = (incidentStart.latitude - (latDifference * TEN_PERCENT));
+            newLng = (incidentStart.longitude + (lngDifference * TEN_PERCENT));
         } else if (direction.equals("SW")){
-            newLat = (incidentStart.latitude - (latDifference * FIVE_PERCENT));
-            newLng = (incidentStart.longitude - (lngDifference * FIVE_PERCENT));
+            newLat = (incidentStart.latitude + (latDifference * TEN_PERCENT));
+            newLng = (incidentStart.longitude + (lngDifference * TEN_PERCENT));
         } else if (direction.equals("SE")){
-            newLat = (incidentStart.latitude + (latDifference * FIVE_PERCENT));
-            newLng = (incidentStart.longitude - (lngDifference * FIVE_PERCENT));
+            newLat = (incidentStart.latitude + (latDifference * TEN_PERCENT));
+            newLng = (incidentStart.longitude - (lngDifference * TEN_PERCENT));
         }
         return new LatLng(newLat, newLng);
     }
@@ -342,6 +378,4 @@ public class MapHandler extends Activity {
         @Override
         public void onProviderDisabled(String provider) {}
     };
-
-
 }

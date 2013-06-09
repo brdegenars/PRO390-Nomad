@@ -11,8 +11,8 @@
                "point":{
                   "type":"Point",
                   "coordinates":[
-                     lat of incident,
-                     lng of incident
+                     40.630663,
+                     -111.903827
                   ]
                },
                "congestion":"",
@@ -25,29 +25,7 @@
                "roadClosed":true,
                "severity":3,
                "start":"\/Date(1307365200000)\/",
-               "type":9,
-               "verified":true
-            },
-            {
-               "__type":"TrafficIncident:http:\/\/schemas.microsoft.com\/search\/local\/ws\/rest\/v1",
-               "point":{
-                  "type":"Point",
-                  "coordinates":[
-                     38.85872,
-                     -94.54638
-                  ]
-               },
-               "congestion":"",
-               "description":"Botts Rd is closed between Andrews Rd and 142nd St - construction",
-               "detour":"To go north take US-71 NB to 140th St and go west on 140th St to access Botts Rd- To go south continue west on MO-150 to Thunderbird Rd to 149th St",
-               "end":"\/Date(1315244760000)\/",
-               "incidentId":191097424,
-               "lane":"",
-               "lastModified":"\/Date(1309391096593)\/",
-               "roadClosed":true,
-               "severity":1,
-               "start":"\/Date(1295704800000)\/",
-               "type":9,
+               "type":1,
                "verified":true
             }
          ]
