@@ -135,6 +135,8 @@ public class NavigationPrompt extends Activity {
         localDataEditor.putString(NAV_DESTINATION, destinationValue);
         localDataEditor.commit();
 
+            CalendarCheck.readCalendarEvent(v.getContext());
+
         Intent launchMapIntent = new Intent(v.getContext(), MapHandler.class);
         startActivity(launchMapIntent);
         }

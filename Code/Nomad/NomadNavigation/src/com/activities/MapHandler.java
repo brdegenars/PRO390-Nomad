@@ -21,7 +21,6 @@ import service.ServiceRequest;
 import service.TrafficURLGenerator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
